@@ -34,7 +34,6 @@ https://gordonlai.github.io/practiceTeamOnSunday/
 待續...
 
 ## 2019/04/27 popUp 視窗練習
-<div style="letter-spacing: 1px;font-size: 20px;font-weight: 600;">
 [參考練習目標](https://static.collectui.com/shots/2542079/daily-ui-016-pop-up-overlay-large)
 -----------------------------------------
 頁面名稱      | 路徑               | 網址  
@@ -44,4 +43,3 @@ https://gordonlai.github.io/practiceTeamOnSunday/
 **Raven**   | ./popUp/Raven/     | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/Raven) 
 **Reynold** | ./popUp/Reynold/   | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/Reynold)  
 **Sally**   | ./popUp/sally/     | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/sally) 
-</div>
