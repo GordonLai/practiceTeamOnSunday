@@ -5,9 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="http://localhost:9000/css/bezier.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:400,700,800">
+  <link rel="stylesheet" href="css/bezier.css">
 </head>
 <body>
-  it's html bezier template
+  <div class="popup">
+    <button id="close"><i class="fas fa-times"></i></button>
+    <p class="title">Keep up with us !</p>
+    <p>Want to be on top of news, courses, articles and exclusive deals ?</p>
+    <p>Suscribe to our newsletter and we promise to send you virtual cookies every Monday!</p>
+    <input id="nameInput" type="text" placeholder="type your name." errormessage="Plase enter your name between three words and two crosses."/>
+    <input id="mailInput" type="text" placeholder="type your e-mail address." errormessage="Plase enter a valid email address."/>
+    <button type="submit">Send me Cookies!</button>
+  </div>
+  <script>
+    window.onload = () => {
+
+      function chackInput(element, RegExpRule){
+        const emailRule = new RegExp(RegExpRule)
+        let reEmaistatus = true
+        element.addEventListener('blur', () =>{
+          let nowEmaistatus = emailRule.exec(element.value) ? true: false
+          if (nowEmaistatus == reEmaistatus) return
+          if (emailRule.exec(element.value)) {
+            element.classList.remove('error')
+            element.nextSibling.remove()
+            reEmaistatus = true
+          } else {
+            element.classList.add('error')
+            let errorTextBox = document.createElement("p")
+            let errorText = document.createTextNode(element.getAttribute('errormessage'))
+            let parentDiv = element.parentNode
+            errorTextBox.appendChild(errorText)
+            parentDiv.insertBefore(errorTextBox, element.nextSibling)
+            reEmaistatus = false
+          }
+        })
+      }
+
+      chackInput(document.getElementById('mailInput'), /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/)
+
+      chackInput(document.getElementById('nameInput'), /\D{3,20}/)
+
+    }
+  </script>
 </body>
 </html>

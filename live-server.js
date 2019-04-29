@@ -39,7 +39,7 @@ parther.forEach((item, key) => {
   newParams.port = key === 0 ? 9000 : newParams.port + (key * 10);
   newParams.root = item === 'main' ? './' : dir + "/";
   // console.log(newParams.root);
-  if (!creatServer(newParams)) setTimeout(creatServer, 1500, newParams);
+  // if (!creatServer(newParams)) setTimeout(creatServer, 1500, newParams);
 });
 
 function creatServer (option) {

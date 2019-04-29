@@ -1,1 +1,194 @@
-body {color: #0331D1;}
+$c1:#f8786b;
+$c2:#efc84a;
+
+@mixin size($w,$h:$w) {
+  width: $w;
+  height: $h;
+}
+
+@mixin setBorder($w,$c) {
+  border: $w solid $c;
+}
+
+@mixin brdRad($tl,$tr:$tl,$br:$tl, $bl:$tl) {
+  border-top-left-radius: $tl;
+	border-top-right-radius: $tr;
+	border-bottom-right-radius: $br;
+	border-bottom-left-radius: $bl;
+}
+
+@mixin setBg($color){
+  background-color: $color;
+}
+d
+
+body {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  background: url("https://images8.alphacoders.com/540/thumb-1920-540082.jpg") no-repeat;
+  position: relative;
+  height: 100vh;
+}
+button{
+  display: block;
+  border: none;
+}
+.close{
+  @include size(20px);
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  &::before{
+    content: '';
+    position: absolute;
+    @include size(20px,2px);
+    @include setBg(#3e3e3e);
+    transform: rotate(45deg)
+  }
+  &::after{
+    content: '';
+    position: absolute;
+    @include size(20px,2px);
+    @include setBg(#3e3e3e);
+    transform: rotate(-45deg)
+  }
+}
+title{
+  display: block;
+  color:$c1;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-top: -20px;
+  margin-bottom: 50px;
+}
+.container{
+  @include size(510px, 410px);
+  @include brdRad(4px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #fff;
+}
+.relative{
+  position: relative;
+  height: 100%;
+  text-align: center;
+  padding: 57.5px;
+  box-sizing: border-box;
+  .decoration{
+    @include size(150px);
+    @include brdRad(50%);
+    background:$c2;
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    .mail-container{
+      @include size(100px, 55px);
+      @include setBg(#bd3e25);
+      position: relative;
+      margin: 65px auto;
+      &::before{
+        content: '';
+        @include size(0);
+        position: absolute;
+        top: -30px;
+        left: 0;
+        border-style: solid;
+        border-width: 0px 50px 30px 50px;
+        border-color: transparent transparent #bd3e25 transparent;
+      }
+      .mail-left{
+        @include size(0);
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline;
+        border-style: solid;
+        border-width: 27.5px 0 27.5px 50px;
+        border-color: transparent transparent transparent #df5a48;
+        z-index: 2;
+      }
+      .mail-right {
+        @include size(0);
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: inline;
+        border-style: solid;
+        border-width: 27.5px 50px 27.5px 0;
+        border-color: transparent #df5a48 transparent transparent;
+        z-index: 2;
+      }
+      .paper{
+        @include size(90px,60px);
+        @include setBg(#fff);
+        @include brdRad(4px);
+        position: absolute;
+        top: -32px;
+        left: 50%;
+        transform: translateX(-50%);
+        &::before{
+          content: '';
+          position: absolute;
+          @include size(25px,15px);
+          @include setBg(#e2574c);
+          transform: rotate(45deg);
+          position: absolute;
+          top: 40%;
+          left: 33%;
+          border-top-left-radius: 16px;
+          border-bottom-left-radius: 16px;
+        }
+        &::after{
+          content: '';
+          position: absolute;
+          @include size(25px,15px);
+          @include setBg(#e2574c);
+          transform: rotate(-45deg);
+          position: absolute;
+          top: 40%;
+          left: 42%;
+          border-top-right-radius: 16px;
+          border-bottom-right-radius: 16px;
+        }
+      }
+    }
+  }
+  .title{
+    color: $c1;
+    text-align: right;
+  }
+  .text-contant{
+    color: #696969;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: .4px;
+    text-align: left;
+  }
+  #input-mail{
+    @include setBg(#f1f1f1);
+    @include setBorder(1px,#eeeeee);
+    @include brdRad(4px);
+    @include size(100%, 40px);
+    color: #c9c9c9;
+    margin-bottom: 24px;
+    &::placeholder{
+      color: #c9c9c9;
+      padding-left: 16px;
+    }
+  }
+  button{
+    @include brdRad(4px);
+    @include size(210px, 40px);
+    @include setBg($c2);
+    text-align: center;
+    line-height: 40px;
+    color: $c1;
+    margin: auto;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}

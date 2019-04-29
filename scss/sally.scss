@@ -1,1 +1,195 @@
-body {color: #7D8623;}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+@mixin absolute($top: auto, $left: auto, $bottom: auto, $right: auto) {
+  position: absolute;
+  @if $top != auto {
+    top: $top;
+  }
+  @if $left != auto {
+    left: $left;
+  }
+  @if $bottom != auto {
+    bottom: $bottom;
+  }
+  @if $right != auto {
+    right: $right;
+  }
+}
+
+body, html{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.box_img{
+  width: 100%;
+  height: 100vh;
+  background-image: url(https://picsum.photos/800/600?id=25);
+  @include absolute($top: 50%, $left: 50%);
+  transform: translate(-50%, 0%);
+  background-size: cover;
+  
+}
+.box{
+  width: 500px;
+  height: 400px;
+  background-color: rgba(255,255,255,.9);
+  box-shadow: 0 3px 5px rgba(0,0,0,.5);
+  border-radius: 5px;
+  @include absolute($top: 50%, $left: 50%);
+  transform: translate(-50%, 50%);
+    // padding: 10%;
+
+  .envlop{
+    @include absolute($top:-40px, $left:-40px);
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+    background-color: #EFC84A;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: scale(.9);
+    transform-origin: center;
+    .heart{
+      position: relative;
+      &:before, 
+      &:after{
+        content: "";
+        @include absolute($top:-28px);
+        width: 20px;
+        height: 30px;
+        background: #E2564C;
+        border-radius: 25px 25px 0 0;
+        z-index: 4;
+      }
+      &:before{
+        left:-14px;
+        transform: rotate(-45deg);
+      }
+      &:after{
+        right:-14px;
+        transform: rotate(45deg);
+      }
+    }
+    .letter{
+      @include absolute($top:35px);
+      width: 84px;
+      height: 60px;
+      background-color: #E4E7E8;
+      border-radius: 3px;
+      z-index:2;
+    }
+    .top{
+      @include absolute($top:35px);
+      width: 100px;
+      height: 88px;
+      clip-path: polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%);
+      background-color:#BD3E24;
+      z-index:1;
+    }
+    .left{
+      @include absolute($top:67px, $left:27px);
+      width: 50px;
+      height: 57px;
+      clip-path: polygon(100% 50%, 0 0, 0 100%);
+      background-color:#DF5A48;
+      z-index:3;
+
+    }
+    .right{
+      @include absolute($top:67px, $left:77px);
+      width: 50px;
+      height: 57px;
+      clip-path: polygon(0 50%, 100% 0, 100% 100%);
+      background-color:#DF5A48; 
+      z-index:3;
+    }
+    .bottom{
+      @include absolute($top:94px, $left:27px);
+      width: 100px;
+      height: 30px;
+      clip-path: polygon(0 100%, 50% 0, 100% 100%);;
+      background-color:#BD3E24;
+      z-index:3;
+    }
+  }
+    
+  .close{
+    display: block;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include absolute($top: 10px, $right: 10px);
+    transition: 0.5s;
+    &:hover{
+      transform: rotate(90deg);
+    }
+    &:before,
+    &:after {
+      content: '';
+      width: 20px;
+      height: 2px;
+      display: block;
+      background-color: #000;
+      margin: 0 auto;
+    }
+    &:before {
+      margin-bottom: -2.5px;
+      transform: rotate(45deg);
+    }
+    &:after {
+      margin-bottom: -2.5px;
+      transform: rotate(-45deg);
+    }
+  }
+  h1{
+    font-size: 36px;
+    color: #f7796c;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 50px;
+    margin: 20px 50px 0 134px;
+  }
+  p{
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  input.email{
+    display:block;
+    width: 100%;
+    max-width: 395px;
+    font-size: 16px;
+    background-color: #F0F0F0;
+    border: 1px solid #c0c0c0;
+    border-radius: 6px;
+    margin: 24px auto;
+    padding: 10px 0 10px 16px;
+  }
+  a{
+    display: block;
+    width: 210px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 auto;
+    background-color: #EFC84A;
+    color: #DF5A48;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+}

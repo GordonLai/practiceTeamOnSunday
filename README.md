@@ -1,5 +1,8 @@
 # Pactice Team On Sunday - 假日練習團
 
+## 主頁
+https://gordonlai.github.io/practiceTeamOnSunday/
+
 ## 練習規則
 <ol>
   <li>
@@ -9,29 +12,36 @@
     Code => 採用 visual studio code live share 的方式，來進行討論
   </li>
   <li>
-    通信 => 採用 zoom 通信方式，開場會說明，之前有問題由於討論或是掛著也行
+    通信 => 採用 zoom 通信方式，開場會說明，之後有問題可在進來討論或是掛著也行
   </li>
   <li>
-    每週會有不同的主題來促進大家練習的目標，不強迫是否完成，但希望每次主題都能當能當日完成
+    每週會有不同的主題來促進大家練習的目標，不強迫是否完成，但希望每次主題都能夠當日完成
   </li>
-  <li>有問題歡迎一起討論，有討論才會進步，希望大家練習愉快</li>
+  <li>
+    有問題歡迎一起討論，有討論才會進步，希望大家練習愉快
+  </li>
 </ol>
 
 ## 目錄
 ```
-  1. 專案名稱/個人名稱/
+  1. 主題名稱/個人名稱/
   2. index.html
   3. scss/個人名稱.scss
   4. css/(編輯過)個人名稱.css
 ```
 
-## 2019/04/27 popUp 視窗練習
-* **主版**  `"./" at ` http://localhost:9000
-* **bezier**  `"./popUp/bezier/" at` http://localhost:9060
-* **ivy**  `"./popUp/ivy/" at` http://localhost:9030
-* **lai**  `"./popUp/lai/" at` http://localhost:9010
-* **Raven**  `"./popUp/Raven/" at` http://localhost:9100
-* **LS**  `"./popUp/LS/" at` http://localhost:9280
-* **Reynold**  `"./popUp/Reynold/" at` http://localhost:9150
-* **Sally**  `"./popUp/sally/" at` http://localhost:9210
+## 2019/05/05 color picker UI 與 功能練習
+待續...
 
+## 2019/04/27 popUp 視窗練習
+<div style="letter-spacing: 1px;font-size: 20px;font-weight: 600;">
+[參考練習目標](https://static.collectui.com/shots/2542079/daily-ui-016-pop-up-overlay-large)
+-----------------------------------------
+頁面名稱      | 路徑               | 網址  
+------------| -------------------|-------
+**bezier**  | ./popUp/bezier/    | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/bezier) 
+**lai**     | ./popUp/lai/       | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/lai) 
+**Raven**   | ./popUp/Raven/     | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/Raven) 
+**Reynold** | ./popUp/Reynold/   | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/Reynold)  
+**Sally**   | ./popUp/sally/     | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/sally) 
+</div>

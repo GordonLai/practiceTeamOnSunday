@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.box_img {
+  width: 100%;
+  height: 100vh;
+  background-image: url(https://picsum.photos/800/600?id=25);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-size: cover;
+}
+
+.box {
+  width: 500px;
+  height: 400px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.box .envlop {
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 155px;
+  height: 155px;
+  border-radius: 50%;
+  background-color: #EFC84A;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0.9);
+  transform-origin: center;
+}
+
+.box .envlop .heart {
+  position: relative;
+}
+
+.box .envlop .heart:before, .box .envlop .heart:after {
+  content: "";
+  position: absolute;
+  top: -28px;
+  width: 20px;
+  height: 30px;
+  background: #E2564C;
+  border-radius: 25px 25px 0 0;
+  z-index: 4;
+}
+
+.box .envlop .heart:before {
+  left: -14px;
+  transform: rotate(-45deg);
+}
+
+.box .envlop .heart:after {
+  right: -14px;
+  transform: rotate(45deg);
+}
+
+.box .envlop .letter {
+  position: absolute;
+  top: 35px;
+  width: 84px;
+  height: 60px;
+  background-color: #E4E7E8;
+  border-radius: 3px;
+  z-index: 2;
+}
+
+.box .envlop .top {
+  position: absolute;
+  top: 35px;
+  width: 100px;
+  height: 88px;
+  clip-path: polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%);
+  background-color: #BD3E24;
+  z-index: 1;
+}
+
+.box .envlop .left {
+  position: absolute;
+  top: 67px;
+  left: 27px;
+  width: 50px;
+  height: 57px;
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+  background-color: #DF5A48;
+  z-index: 3;
+}
+
+.box .envlop .right {
+  position: absolute;
+  top: 67px;
+  left: 77px;
+  width: 50px;
+  height: 57px;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  background-color: #DF5A48;
+  z-index: 3;
+}
+
+.box .envlop .bottom {
+  position: absolute;
+  top: 94px;
+  left: 27px;
+  width: 100px;
+  height: 30px;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  background-color: #BD3E24;
+  z-index: 3;
+}
+
+.box .close {
+  display: block;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: 0.5s;
+}
+
+.box .close:hover {
+  transform: rotate(90deg);
+}
+
+.box .close:before, .box .close:after {
+  content: '';
+  width: 20px;
+  height: 2px;
+  display: block;
+  background-color: #000;
+  margin: 0 auto;
+}
+
+.box .close:before {
+  margin-bottom: -2.5px;
+  transform: rotate(45deg);
+}
+
+.box .close:after {
+  margin-bottom: -2.5px;
+  transform: rotate(-45deg);
+}
+
+.box h1 {
+  font-size: 36px;
+  color: #f7796c;
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 50px;
+  margin: 20px 50px 0 134px;
+}
+
+.box p {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.box input.email {
+  display: block;
+  width: 100%;
+  max-width: 395px;
+  font-size: 16px;
+  background-color: #F0F0F0;
+  border: 1px solid #c0c0c0;
+  border-radius: 6px;
+  margin: 24px auto;
+  padding: 10px 0 10px 16px;
+}
+
+.box a {
+  display: block;
+  width: 210px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 auto;
+  background-color: #EFC84A;
+  color: #DF5A48;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
