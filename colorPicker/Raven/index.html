@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/Raven.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+</head>
+<body>
+  <div id="app" class="main">
+    <section class="function-panel">
+      <ul>
+        <li class="active">create</li>
+        <li>my collections</li>
+        <li>explore</li>
+      </ul>
+      <div class="setting"></div>
+    </section>
+    <section class="container">
+      <title class="container-title">my collection</title>
+      <div class="collect">
+        <ul class="collect-list">
+          <li v-for="item in collectList">
+            <div class="color-layout" :style="{background:`${item.code}` }"></div>
+            <div class="code">{{item.code}}</div>
+            <div class="close-btn">x</div>
+          </li>
+        </ul>
+        <button class="btn">create new</button>
+      </div>
+      <div class="color-picker">
+        <div class="color-block" @mousedown="choose($event)" >
+          <div class="pointer" :style="pointPosition" ref="point"></div>
+        </div>
+        <div class="preview">
+          <div class="preview-color"></div>
+        </div>
+        <button class="btn">add to collection</button>
+      </div>
+      <div class="color-line"></div>
+      <div class="color-code">
+        <div class="hsb">
+          <div class="code-list">
+            <div class="color-model">h</div>
+            <label class="rbg-num">
+              <input type="number" name="num" id="num" v-model="hsb.h">
+            </label>
+          </div>
+          <div class="code-list">
+              <div class="color-model">s</div>
+              <label class="rbg-num">
+                <input type="number" name="num" id="num" v-model="hsb.s">
+              </label>
+            </div>
+            <div class="code-list">
+              <div class="color-model">b</div>
+              <label class="rbg-num">
+                <input type="number" name="num" id="num" v-model="hsb.b">
+              </label>
+            </div>
+          </div>
+        <div class="rgb">
+          <div class="code-list">
+            <div class="color-model">r</div>
+              <label class="rbg-num">
+                <input type="number" name="num" id="num" v-model="rgb.r">
+              </label>
+            </div>
+            <div class="code-list">
+              <div class="color-model">g</div>
+                <label class="rbg-num">
+                  <input type="number" name="num" id="num" v-model="rgb.g">
+                </label>
+              </div>
+              <div class="code-list">
+                <div class="color-model">b</div>
+                  <label class="rbg-num">
+                    <input type="number" name="num" id="num" v-model="rgb.b">
+                  </label>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body> 
+</html>
+<script>
+var app = new Vue({
+  el:'#app',
+  data: {
+    isDrag: false,
+    dataPos: {
+      x: 0,
+      y: 0
+    },
+    collectList:[
+      {
+        code: '#f3ceb4'
+      },
+      {
+        code: '#f19fb5'
+      },
+      {
+        code: '#f46d8d'
+      },
+      {
+        code: '#014256'
+      },
+      {
+        code: '#061127'
+      }
+    ],
+    rgb:{
+      r: 0,
+      g: 0,
+      b :0
+    },
+    hsb: {
+      h: 0,
+      s: 0,
+      b: 0
+    }
+  },
+  computed: {
+    pointPosition(){
+      return {
+        top: this.dataPos.y +'px',
+        left: this.dataPos.x +'px'
+      }
+    }
+  },
+  methods: {
+    choose(ev) {
+      if(!this.isDrag) {
+        window.addEventListener('mousemove', this.moveOn)
+        window.addEventListener('mouseup', this.moveEnd)
+      }
+    },
+    getPos (ev){
+      let point = this.$refs.point;
+      let X = ev.offsetX - ( point.offsetWidth / 2 )
+      let Y = ev.offsetY - ( point.offsetHeight / 2 )
+      
+      return {x: X ,y: Y }
+    },
+    moveOn(ev) {
+      let oEvent = ev || event;
+      let pos = this.getPos(oEvent)
+      let X = pos.x
+      let Y = pos.y 
+      // console.log(X,Y)
+      this.dataPos.x = X
+      this.dataPos.y = Y
+    },
+    moveEnd(){
+      window.removeEventListener('mousemove', this.moveOn)
+      window.removeEventListener('mouseup', this.moveEnd)
+    }
+  },
+})
+</script>
+
+</script>

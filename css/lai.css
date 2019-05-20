@@ -1,288 +1,336 @@
-@import url("https://fonts.googleapis.com/css?family=Ubuntu");
-.popModule .container, .popModule .foot .submit, .inputModule input {
-  font-family: 'Ubuntu', sans-serif;
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Noto+Serif+TC:400,700|Ubuntu&amp;subset=chinese-traditional");
+@import url("https://unpkg.com/element-ui/lib/theme-chalk/index.css");
+.item, button {
+  outline: none;
+  text-decoration: none;
+  color: #3a93d2;
+  background: none;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: unset;
+  cursor: pointer;
 }
 
-html, body {
-  padding: 0;
+body, html {
+  letter-spacing: .8px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: 14px;
+  font-family: "Noto Serif TC serif";
+}
+
+.item[icon]:before {
+  font-family: 'element-icons';
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+}
+
+.item[icon="edit"]:before {
+  content: "";
+}
+
+.item[icon="share"]:before {
+  content: "";
+}
+
+.item[icon="setting"]:before {
+  content: "";
+}
+
+.item[icon="left-arrow"]:before {
+  content: "";
+}
+
+.item[icon="top-arrow"]:before {
+  content: "";
+}
+
+.item[icon="bottom-arrow"]:before {
+  content: "";
+}
+
+.item[icon="right-arrow"]:before {
+  content: "";
+}
+
+body, html {
   margin: 0;
+  padding: 0;
+  background: #dedede;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
   width: 100vw;
   height: 100vh;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 body {
-  background: url("https://live.staticflickr.com/3139/5844705976_74dd4394ff_b.jpg") no-repeat center center #f1f1f1;
-  background-size: cover;
+  overflow-y: auto;
 }
 
-body:before {
-  background: url("https://live.staticflickr.com/3139/5844705976_74dd4394ff_b.jpg") no-repeat center center #f1f1f1;
-  background-size: cover;
+body:before, body:after {
+  display: inline-block;
   content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  box-shadow: inset 0 0 120px 20px rgba(0, 0, 0, 0.5);
-  mix-blend-mode: overlay;
-}
-
-.popModule {
-  background: white;
-  position: fixed;
-  width: 98%;
-  max-width: 500px;
-  margin: auto;
-  padding: 60px 60px 30px 60px;
-  height: 90%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-height: 400px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
-}
-
-.popModule .container {
   height: 100%;
+  width: 1px;
+  vertical-align: middle;
 }
 
-.popModule .container .right {
-  position: absolute;
-  right: 1.2vw;
-  top: 1.2vw;
-  padding: 5px;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.popModule .container .right:hover {
-  transform: rotate(90deg) scale(1.2);
-}
-
-.popModule .container .right:hover .close, .popModule .container .right:hover .close:before {
-  background: #df5947;
-}
-
-.popModule .tip {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  background: #efc84a;
-  border-radius: 100%;
-  left: -60px;
-  top: -60px;
-}
-
-.popModule .title {
-  font-size: 36px;
-  text-align: right;
-  font-weight: 600;
-  color: #f8786b;
-  letter-spacing: .5px;
+#app {
+  background: white;
+  width: 98%;
+  max-width: 780px;
+  margin: auto;
   position: relative;
-  margin-bottom: 5px;
-}
-
-.popModule .content {
-  color: #696969;
-  font-weight: 400;
-  letter-spacing: .4px;
-  min-height: calc(100% - 80px - 94px);
-  line-height: 1.5;
-  text-align: justify;
-  text-justify: inter-ideograph;
-}
-
-.popModule .foot {
-  text-align: center;
-}
-
-.popModule .foot .inputModule {
-  width: 100%;
-}
-
-.popModule .foot .submit {
-  border: none;
-  font-size: 16px;
-  height: 40px;
-  background: #efc84a;
-  color: #df5947;
-  font-weight: 800;
-  letter-spacing: .5px;
-  cursor: pointer;
-  padding: 0 20px;
-  margin-top: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
   border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.13);
 }
 
-.popModule .foot .submit:hover, .popModule .foot .submit:active {
-  background: #df5947;
+#app.theme-default .header {
+  background: #f36d8d;
+}
+
+#app.theme-default .containerFoot button:hover {
+  background: #0c0c0c;
   color: white;
 }
 
-.inputModule {
+#app.theme-blueStyle .header {
+  background: #409EFF;
+}
+
+#app.theme-blueStyle .containerFoot button:hover {
+  background: #303133;
+  color: white;
+}
+
+.cell {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.cell .row {
   display: block;
 }
 
-.inputModule input {
-  background: #f1f1f1;
-  color: #696969;
-  box-sizing: border-box;
-  border: solid 1px #c5c5c5;
-  height: 36px;
-  padding: 0 8px;
-  width: 100%;
+button {
+  border: solid 1px #2c2c2c;
+  color: #2c2c2c;
+  height: 35px;
+  padding: 0 15px;
   font-size: 14px;
+  transition: .2s;
+}
+
+.ticket {
+  font-size: 14px;
+  border-left-width: 15px;
+  border-left-style: solid;
+  text-indent: 10px;
+  color: #969696;
+  padding: 15px 0;
+  font-weight: 600;
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.1);
+  min-width: 100px;
+}
+
+.colorInput + .colorInput {
+  margin-top: 5px;
+}
+
+.colorInput > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.colorInput span {
+  font-size: 18px;
+  color: #969696;
+  font-weight: 600;
+  margin-right: 10px;
+  width: 20px;
+}
+
+.colorInput input {
   outline: none;
-  letter-spacing: .9px;
-  border-radius: 3px;
+  height: 28px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  width: calc(100% - 30px);
 }
 
-.inputModule input ::placeholder {
-  text-decoration: initial;
+.colorBox > * {
+  display: inline-block;
+  vertical-align: top;
 }
 
-.inputModule input:focus, .inputModule input:active {
-  border-color: #df5947;
-}
-
-.close[icon="delete"] {
+.colorBox .colorCube {
+  width: 286px;
+  height: 286px;
   position: relative;
-  display: block;
-  background: #c5c5c5;
-  transform: rotate(-45deg);
+  cursor: crosshair;
+  background-image: -moz-linear-gradient(to top, black, rgba(0, 0, 0, 0)),-moz-linear-gradient(to right, white, rgba(255, 255, 255, 0));
+  background-image: -webkit-linear-gradient(to top, black, rgba(0, 0, 0, 0)),-webkit-linear-gradient(to right, white, rgba(255, 255, 255, 0));
+  background-image: -o-linear-gradient(to top, black, rgba(0, 0, 0, 0)),-o-linear-gradient(to right, white, rgba(255, 255, 255, 0));
+  background-image: -ms-linear-gradient(to top, black, rgba(0, 0, 0, 0)),-ms-linear-gradient(to right, white, rgba(255, 255, 255, 0));
+  background-image: linear-gradient(to top, black, rgba(0, 0, 0, 0)), linear-gradient(to right, white, rgba(255, 255, 255, 0));
+  background-color: #f7a50b;
 }
 
-.close[icon="delete"], .close[icon="delete"]:before {
-  height: 15px;
-  width: 2px;
-  border-radius: 1px;
-}
-
-.close[icon="delete"]:before {
-  content: "";
-  display: block;
-  background: #c5c5c5;
-  transform: rotate(90deg);
-}
-
-[icon="mail"] .mailBody {
-  background: #bd3e26;
-  height: 55px;
+.colorBox .colorCube .point {
   position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  border: solid 2px white;
+  top: 5%;
+  left: 5%;
+  cursor: pointer;
+}
+
+.colorBox .colorControl {
+  height: 286px;
+  width: 20px;
+  position: relative;
+  background-image: -moz-linear-gradient(to top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
+  background-image: -webkit-linear-gradient(to top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
+  background-image: -o-linear-gradient(to top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
+  background-image: -ms-linear-gradient(to top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
+  background-image: linear-gradient(to top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
+}
+
+.colorBox .colorControl .item {
+  position: absolute;
+  right: -25px;
+  color: #969696;
+  font-size: 22px;
+  bottom: 5%;
+}
+
+.header {
+  padding: 10px;
+  position: relative;
+}
+
+.header .item {
+  color: white;
+}
+
+.header > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header .menu {
+  width: calc(100% - 110px);
+  font-size: 12px;
+  font-family: "Ubuntu sans-serif";
+}
+
+.header .menu .item {
+  letter-spacing: 1px;
+  font-weight: 500;
+  padding: 12px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.header .menu .item:hover, .header .menu .item:active, .header .menu .item.active {
+  background: #e35d7d;
+}
+
+.header .headRight {
   width: 100px;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  transform: translate(0, 10px);
+  text-align: right;
 }
 
-[icon="mail"] .mailBody .content {
-  height: 55px;
-  width: 100%;
+.header .headRight .item {
+  font-size: 16px;
+  margin-left: 3px;
+  opacity: 1;
+}
+
+.header .headRight .item:hover {
+  opacity: .7;
+}
+
+.container {
+  padding: 30px;
+}
+
+.container .container-title {
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.container .container-title, .container .container-title .item {
+  color: #969696;
+}
+
+.container .container-title .item {
+  font-size: 14px;
+}
+
+.container .section .ticket + .ticket {
+  margin-top: 15px;
+}
+
+.container .section .cell {
+  width: calc((100% - 372px) / 2);
+  box-sizing: border-box;
+  max-height: 286px;
   overflow: hidden;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  position: relative;
-  z-index: 1;
+  overflow-y: auto;
 }
 
-[icon="mail"] .mailBody .mailLib {
-  border-width: 0 50px 28px 50px;
-  top: -28px;
-  border-color: transparent transparent #bd3e26 transparent;
+.container .section .colorBox {
+  padding: 0 20px;
+  width: 360px;
+  text-align: center;
+  overflow: visible;
 }
 
-[icon="mail"] .mailBody .mailLeft {
-  border-width: 28px 0 28px 50px;
-  left: 0;
-  border-color: transparent transparent transparent #df5947;
+.container .section .row-group + .row-group {
+  margin-top: 15px;
 }
 
-[icon="mail"] .mailBody .mailRight {
-  right: 0;
-  border-width: 28px 50px 28px 0;
-  border-color: transparent #df5947 transparent transparent;
+.containerFoot {
+  margin-top: 15px;
 }
 
-[icon="mail"] .mailBody .mailLetter {
-  background: #E4E7E8;
-  height: 60px;
-  width: 80%;
-  position: absolute;
-  top: -33px;
-  left: 10%;
-  border-radius: 2px;
-  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.1), inset 0 0 2px 1px white;
+.containerFoot .cell:first-child {
+  width: 155px;
 }
 
-[icon="mail"] .mailLib, [icon="mail"] .mailLeft, [icon="mail"] .mailRight {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  position: absolute;
-  bottom: 0;
+.containerFoot .cell + .cell {
+  width: calc(100% - (172px + 115px + 90px));
+  text-align: center;
 }
 
-[icon="mail"] .head {
-  background: #df5947;
-  width: 20px;
-  height: 20px;
-  border-radius: 3px;
-  transform: rotate(405deg);
-  position: absolute;
-  margin: auto;
-  top: 20px;
-  left: 0;
-  right: 0;
-  transition: .5s;
+.containerFoot .colorSelect {
+  display: inline-block;
+  vertical-align: top;
+  width: 35px;
+  height: 35px;
 }
 
-[icon="mail"] .head:before, [icon="mail"] .head:after {
-  transform: rotate(-45deg);
-  content: "";
-  display: block;
-  width: 20px;
-  height: 20px;
-  background: #df5947;
-  border-radius: 100%;
-  position: absolute;
-  top: -5px;
-}
-
-[icon="mail"] .head:before {
-  transform: translate(-9px, 5px);
-}
-
-[icon="mail"] .head:after {
-  transform: translate(0px, -4px);
-}
-
-[icon="mail"] .head > span {
-  position: absolute;
-  background: white;
-  width: 15px;
-  height: 15px;
-  border-radius: 100%;
-  z-index: 1;
-  transform: rotate(-45deg) translate(7px, -4px);
-}
-
-[icon="mail"] .head > span:before {
-  position: absolute;
-  background: #df5947;
-  content: "";
-  display: block;
-  width: 18px;
-  height: 18px;
-  border-radius: 100%;
-  top: 0;
-  right: 0;
+.test {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
 }

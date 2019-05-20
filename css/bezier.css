@@ -1,111 +1,164 @@
 body {
-  background: url("https://images.pexels.com/photos/373076/pexels-photo-373076.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat;
-  background-size: cover;
-  height: 100vh;
-}
-
-body *:focus {
-  outline: none !important;
-  box-shadow: 0 0 10px #719ECE;
-}
-
-body .popup {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px #444;
+  background: #ccc;
   font-family: 'Mukta', sans-serif;
-  padding: 3vw;
-  box-sizing: border-box;
-  width: 30vw;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -30vh;
-  line-height: 1.5em;
-  margin-left: calc(30vw/-2);
+  color: #ccc;
 }
 
-body .popup #close {
-  background: none;
-  border: none;
-  position: absolute;
-  top: 0;
-  right: 0;
+body ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+body [draggable="true"] {
+  /*
+    To prevent user selecting inside the drag source
+   */
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+body .colorPickerBox {
+  width: 531px;
+  margin: 15vh auto 0 auto;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 0px 1px, rgba(0, 0, 0, 0.15) 0px 8px 16px;
+}
+
+body .colorPickerBox .nav {
+  background: #f46d8d;
+  margin: 0;
   padding: 10px;
+  overflow: hidden;
+  color: #fff;
 }
 
-body .popup #close i:before {
-  color: #b3b3b3;
-}
-
-body .popup p.title {
-  color: #f7796c;
-  font-size: 32px;
-  margin-block-start: 0.5em;
-  font-weight: 800;
-  margin-left: 3vw;
-  line-height: 1.2em;
-}
-
-body .popup p {
-  color: #888;
-  font-size: 16px;
-}
-
-body .popup [type="text"] {
-  background: #f0f0f0;
-  border: 1px solid #b3b3b3;
-  width: 100%;
-  border-radius: 5px;
-  padding: 8px 10px;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-  font-style: italic;
-}
-
-body .popup [type="text"]::placeholder {
-  color: #b3b3b3;
-}
-
-body .popup [type="text"].error {
-  border: 1px solid #fc3a3a;
-  box-shadow: 0 0 10px #df5a48;
-  margin-bottom: 0px;
-}
-
-body .popup [type="text"].error + p {
-  color: #fc3a3a;
-  margin: 0 0 20px 0;
+body .colorPickerBox .nav li {
+  float: left;
+  padding: 5px;
+  margin: 0 5px;
   font-size: 12px;
 }
 
-body .popup [type="submit"] {
-  background: #efc84a;
-  color: #f7796c;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  padding: 6px 25px;
-  margin: 0 auto;
-  display: block;
-  font-weight: 700;
+body .colorPickerBox .nav li.ativt {
+  background: #e15e7d;
 }
 
-body .popup:before {
-  content: "\f658";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-size: 6vw;
-  color: #df5a48;
-  text-align: center;
-  display: block;
-  line-height: 1.5em;
-  width: 10vw;
-  height: 10vw;
-  margin: -4vw 0 0 -4vw;
-  border-radius: 50%;
-  background: #efc84a;
+body .colorPickerBox .content {
+  padding: 20px;
+  color: #ccc;
+  overflow: hidden;
+}
+
+body .colorPickerBox .content h1 {
+  font-size: 16px;
+  margin: 0 0 10px 0;
+}
+
+body .colorPickerBox .content .collectionList {
+  float: left;
+  width: 100px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+body .colorPickerBox .content .colorPickPool {
+  background: red;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 256px;
+  height: 256px;
+  position: relative;
+  float: left;
+  overflow: hidden;
+}
+
+body .colorPickerBox .content .colorPickPool .Chroma {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+}
+
+body .colorPickerBox .content .colorPickPool .Brightness {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+}
+
+body .colorPickerBox .content .colorPickPool #point {
+  position: absolute;
+  cursor: all-scroll;
+}
+
+body .colorPickerBox .content .colorPickPool #point::after {
+  display: block;
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  box-shadow: white 0px 0px 0px 1.5px, rgba(0, 0, 0, 0.3) 0px 0px 1px 1px inset, rgba(0, 0, 0, 0.4) 0px 0px 1px 2px;
+  transform: translate(-6px, -6px);
+}
+
+body .colorPickerBox .content .rainbow {
+  height: 256px;
+  width: 19px;
+  float: left;
+  position: relative;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  background: linear-gradient(to top, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%);
+}
+
+body .colorPickerBox .content .rainbow #bar {
+  position: absolute;
+  cursor: n-resize;
+}
+
+body .colorPickerBox .content .rainbow #bar::after {
+  content: "\f0d9";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  -webkit-font-smoothing: antialiased;
+  display: block;
+  margin-left: 22px;
+  margin-top: -8px;
+}
+
+body .colorPickerBox .content .inputBox {
+  float: left;
+}
+
+body .colorPickerBox .content .inputBox [type="number"] {
+  width: 50px;
+  text-align: center;
+}
+
+body .colorPickerBox .content .inputBox span {
+  width: 12px;
+  display: inline-block;
+}
+
+body .colorPickerBox .content #nowColor {
+  width: 40px;
+  height: 40px;
+  float: left;
+  clear: left;
+  margin-left: 110px;
+}
+
+body .colorPickerBox .content button {
+  border: 0.8px solid #000;
+  background: #fff;
+  padding: 12px;
+  font-size: 12px;
+  float: left;
+  margin-left: 10px;
 }

@@ -28,15 +28,15 @@ const params = {
     logLevel: 1, // 0 = 僅錯誤，1 = 某些，2 = 批次
     middleware: [function(req, res, next) { next();}], // 採用一系列與Connect兼容的中間件，這些中間件被注入到服務器中間件堆棧中
 };
-// liveServer.start(params);
+liveServer.start(params);
 // console.log(process.cwd());
 
 // 啟動 server
 parther.forEach((item, key) => {
-  const dir = './popUp/' + item;
+  const dir = './colorPicker/' + item;
   if (item !== 'main') checkFolder (dir);
   let newParams = params;
-  newParams.port = key === 0 ? 9000 : newParams.port + (key * 10);
+  newParams.port = 9000 + (key * 10);
   newParams.root = item === 'main' ? './' : dir + "/";
   // console.log(newParams.root);
   // if (!creatServer(newParams)) setTimeout(creatServer, 1500, newParams);
@@ -53,16 +53,26 @@ function creatServer (option) {
 // 確認目錄是否存在
 function checkFolder (folder) {
   let file = folder.replace(/.*(?:\/([^\/]*))$/g, '$1');
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder);
-  }
-  const checkFolder = [folder + '/index.html', 'scss/' + file + '.scss'];
-  checkFolder.map(item => checkFile(item));
+  let root = folder.replace(/(^.+)\/.*/g, '$1');
+  let checkFolderAll = 0;
+  [root, folder].forEach(item => {
+    if (!fs.existsSync(item)) {
+      fs.mkdirSync(item);
+    }
+    checkFolderAll++
+  })
+  if (checkFolderAll === 2) {
+    const checkFolder = [
+      folder + '/index.html',
+      'scss/' + file + '.scss',
+      'css/' + file + '.css'
+    ].forEach(item => checkFile(item));
+  } 
 
   // 新增基本文件
   function checkFile (item) {
     if (!fs.existsSync(item)) {
-      debug(item.indexOf('index.html'), 'warning');
+      // debug(item.indexOf('index.html'), 'warning');
       if (item.indexOf('index.html') > 0) {
         fs.readFile(path.join(__dirname, 'template/index.html'), {encoding:'utf-8'}, (error, reads) => {
           if (error) throw error;
@@ -71,7 +81,7 @@ function checkFolder (folder) {
         })
       }
       if (item.indexOf('index.html') < 0) {
-        fs.writeFile(item, "body {color: " + getRandomColor() + ";}");
+        fs.writeFile(item, "body {color: " + getRandomColor() + ";}", (err, data) => {});
       }
     }
   }

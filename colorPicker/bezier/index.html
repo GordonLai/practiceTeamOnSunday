@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:400,700,800">
+  <link rel="stylesheet" href="/css/bezier.css">
+</head>
+<body>
+  <div class="colorPickerBox">
+    <ul class="nav">
+      <li class="ativt">CREAT</li>
+      <li>MY COLLECTIONS</li>
+      <li>EXPLORE</li>
+    </ul>
+    <div class="content">
+      <h1>MY COLLECTION</h1>
+      <ul class="collectionList">
+        <li><li>
+      </ul>
+
+      <div id="colorPickPool" class="colorPickPool">
+        <div class="Brightness">
+          <div class="Chroma">
+            <div id="point" draggable="true" style="top:50px; left:60px">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rainbow">
+        <div id="bar" draggable="true" style="top:0px"> 
+        </div>
+      </div>
+      
+      <ul class="inputBox">
+        <li><span>H</span> <input id="H" type="number" /></li>
+        <li><span>S</span> <input id="S" type="number" /></li>
+        <li><span>B</span> <input id="B" type="number" /></li>
+      </ul>
+      <ul class="inputBox">
+        <li><span>R</span> <input id="R" type="number" /></li>
+        <li><span>G</span> <input id="G" type="number" /></li>
+        <li><span>B</span> <input id="B" type="number" /></li>
+      </ul>
+      <div id="nowColor" style="background: hsl(0, 77%, 69%);"></div>
+      <button>ADD TO COLLECTION</button>
+    </div>
+    
+  </div>
+  <script>
+    window.onload = () => {
+      const point = document.getElementById('point')
+      const nowColor = document.getElementById('nowColor')
+      const bar = document.getElementById('bar')
+      const pool = document.getElementById('colorPickPool')
+      let hue = 0
+      let saturation = 77
+      let lightness = 69
+      let reX, reY, dffX, dffY, rebarY, dffbarY
+
+
+      point.addEventListener("dragstart",(event) => {
+        reX = event.screenX
+        reY = event.screenY
+        dffX = 0
+        dffY = 0
+        console.log('dragstart',event)
+      }, false)
+      
+      point.addEventListener(
+        'drag',
+        event=>{
+          let nowTop = parseInt(point.style.top)
+          let nowLeft = parseInt(point.style.left)
+
+          if (event.screenX === 0 || nowTop < 0 || nowLeft < 0 || nowTop > 256 || nowLeft > 256){ return }
+
+          dffX = reX - event.screenX // 獲得拖曳後與原位置差
+          dffY = reY - event.screenY 
+
+          let newTop= parseInt(point.style.top) - dffY < 0 ? 0 : parseInt(point.style.top) - dffY
+          let newLeft= parseInt(point.style.left) - dffX < 0 ? 0 : parseInt(point.style.left) - dffX
+          // style原本的值減去差
+          
+          if (newTop >= 256) { newTop = 256}
+          if (newLeft >= 256) { newLeft = 256}
+
+          point.style.top = newTop + 'px'
+          point.style.left = newLeft + 'px'
+          saturation = 100 - Math.round(newTop / 256 * 100) // 飽和度
+          lightness = Math.round((100 - newLeft / 256 * 50)/100*saturation)
+          // 彩度最高(最右方)為50% 同時受到飽和度影響(上下)，所以同時與飽和度成正比
+
+          nowColor.style.background= `hsl(${hue},${saturation}%,${lightness}%)`
+
+          reX = event.screenX
+          reY = event.screenY
+        },
+        false
+      )
+
+      bar.addEventListener("dragstart",(even) => {
+        rebarY = event.screenY
+      }, false)
+
+      bar.addEventListener('drag',even=>{
+        let nowTop = parseInt(bar.style.top)
+        if (event.screenY === 0 || nowTop < 0 || nowTop > 256 ){ return }
+        dffbarY = rebarY - event.screenY
+
+        let newbarTop= parseInt(bar.style.top) - dffbarY < 0 ? 0 : parseInt(bar.style.top) - dffbarY
+
+        if (newbarTop >= 256) { newbarTop = 256}
+
+        bar.style.top = newbarTop + 'px'
+        
+        hue = 360 - Math.round(newbarTop / 256 * 360)
+        nowColor.style.background= `hsl(${hue},${saturation}%,${lightness}%)`
+        pool.style.background= `hsl(${hue},100%,50%)`
+
+        rebarY = event.screenY
+      })
+
+    }
+  </script>
+</body>
+</html>

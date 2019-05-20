@@ -1,0 +1,131 @@
+$color: (
+  headerColor: #f36d8d,
+  backgroundColor: #dedede,
+  fontColor: #2c2c2c,
+  darkColor: #0c0c0c,
+  linkColor: #3a93d2,
+  success: #09fe71,
+  warning: #e50731,
+  colorGray: #969696,
+);
+
+// 樣式
+$themes: (
+  default: (
+    headerColor: map-get($color, headerColor),
+    backgroundColor: map-get($color, backgroundColor),
+    fontColor: map-get($color, fontColor),
+    darkColor: map-get($color, darkColor),
+    linkColor: map-get($color, linkColor),
+    success: map-get($color, success),
+    warning: map-get($color, warning)
+  ),
+  blueStyle: (
+    headerColor: #409EFF,
+    backgroundColor: #F2F6FC,
+    fontColor: #606266,
+    darkColor: #303133,
+    linkColor: #409EFF,
+    success: #67C23A,
+    warning: #F56C6C
+  )
+);
+
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+    &.theme-#{$theme} {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+@function get-value($setting, $name, $index) {
+  @return nth(map-get($setting, $name), $index);
+}
+
+$config: (
+  width: 780px,
+  family: "Noto Serif TC serif" "Ubuntu sans-serif",
+  fontSize: 14px 16px 18px 22px 25px 32px,
+);
+
+%link {
+  outline: none;text-decoration: none;
+  color: map-get($color, linkColor);
+  background: none;
+  text-transform:uppercase;
+  border: none;box-shadow: unset;
+  cursor: pointer;
+}
+
+%fontStyle {
+  letter-spacing: .8px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: nth(map-get($config, fontSize), 1);
+  font-family: nth(map-get($config, family), 1);
+}
+
+// for icon
+$icon-list: (
+  edit: "\e78c",
+  share: "\e793",
+  setting: "\e7ac",
+  left-arrow: "\e792",
+  top-arrow: "\e6e1",
+  bottom-arrow: "\e6df",
+  right-arrow: "\e6e0"
+);
+%iconFont {
+  &[icon]:before {
+    font-family: 'element-icons';
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: baseline;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+  }
+  @each $row, $value in $icon-list {
+    &[icon="#{$row}"]:before {
+      content: map-get($icon-list, $row);
+    }
+  }
+}
+
+// 漸層渲染程式
+@mixin gradient($content) {
+  $browseSupport: -moz- -webkit- -o- -ms-;
+  @each $row in $browseSupport {
+    @if type-of($content) == string {
+      background-image: $row+$content;
+    }
+    @else {
+      $string: '';
+      @each $rows in $content {
+        @if $string == '' {
+            $string: $string + $row + $rows;
+        }
+        @else {
+            $string: $string + ',' + $row + $rows
+        }
+      }
+      background-image: #{$string};
+    }
+  }
+  background-image: #{$content};
+}

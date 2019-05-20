@@ -30,11 +30,35 @@ https://gordonlai.github.io/practiceTeamOnSunday/
   4. css/(編輯過)個人名稱.css
 ```
 
-## 2019/05/05 color picker UI 與 功能練習
+## 2019/05/12 練習未定
 待續...
+
+---
+
+## 2019/05/05 color picker UI 與 功能練習
+### [參考練習目標](https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/f894b437833345.574de629c07b4.jpg)
+
+### 網站功能參考範例
+<ol>
+  <li>
+    阿寶仔提供 => <a>https://casesandberg.github.io/react-color/</a>
+  </li>
+  <li>
+    小藍提供 => <a>https://codepen.io/dustinautery/pen/YwjVBX</a>
+  </li>
+  <li>
+    煜翔提供 => <a>https://developer.mozilla.org/zh-TW/docs/Web/CSS/CSS_Colors/Color_picker_tool</a>
+  </li>
+</ol>
+
+### 大家的作品
+
+---
 
 ## 2019/04/27 popUp 視窗練習
 ### [參考練習目標](https://static.collectui.com/shots/2542079/daily-ui-016-pop-up-overlay-large)
+
+### 大家的作品
 頁面名稱      | 路徑               | 網址  
 ------------| -------------------|-------
 **bezier**  | ./popUp/bezier/    | [頁面連結](https://gordonlai.github.io/practiceTeamOnSunday/popUp/bezier) 

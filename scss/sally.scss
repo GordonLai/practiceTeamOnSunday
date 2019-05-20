@@ -1,4 +1,24 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+ul,
+li {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+
+$color: (
+  gray: #dedede #909090 #888888 #525252,
+  beige: #f0ceb7,
+  lilac: #f39eb5,
+  pink: #f46d8d #e05f7d #e15e7d #f86b8e #f59db5,
+  darkGreen: #044156,
+  darkBlue: #090e2b,
+  darkYellow: #f7be4b
+);
 
 @mixin absolute($top: auto, $left: auto, $bottom: auto, $right: auto) {
   position: absolute;
@@ -16,180 +36,299 @@
   }
 }
 
-body, html{
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body,
+html {
   padding: 0;
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  @at-root body {
+    font-family: 'Roboto', sans-serif;
+    background-color: nth(map-get($color, gray), 1);
+    box-sizing: border-box;
+    position: relative;
+    letter-spacing: 1px;
+  }
 }
 
-body {
-  width: 100%;
-  font-family: 'Open Sans', sans-serif;
-  box-sizing: border-box;
+#colorPicker {
+  width: 900px;
+  height: 620px;
+  // border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  @include absolute($top: 50%, $left: 50%);
+  transform: translate(-50%, -50%);
+  background-color: #fff;
   position: relative;
 }
-
-.box_img{
+.header {
   width: 100%;
-  height: 100vh;
-  background-image: url(https://picsum.photos/800/600?id=25);
-  @include absolute($top: 50%, $left: 50%);
-  transform: translate(-50%, 0%);
-  background-size: cover;
-  
-}
-.box{
-  width: 500px;
-  height: 400px;
-  background-color: rgba(255,255,255,.9);
-  box-shadow: 0 3px 5px rgba(0,0,0,.5);
-  border-radius: 5px;
-  @include absolute($top: 50%, $left: 50%);
-  transform: translate(-50%, 50%);
-    // padding: 10%;
-
-  .envlop{
-    @include absolute($top:-40px, $left:-40px);
-    width: 155px;
-    height: 155px;
-    border-radius: 50%;
-    background-color: #EFC84A;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: nth(map-get($color, pink), 1);
+  > ul {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 45%;
+    height: 40px;
     align-items: center;
-    transform: scale(.9);
-    transform-origin: center;
-    .heart{
-      position: relative;
-      &:before, 
-      &:after{
-        content: "";
-        @include absolute($top:-28px);
-        width: 20px;
-        height: 30px;
-        background: #E2564C;
-        border-radius: 25px 25px 0 0;
-        z-index: 4;
-      }
-      &:before{
-        left:-14px;
-        transform: rotate(-45deg);
-      }
-      &:after{
-        right:-14px;
-        transform: rotate(45deg);
+    &:nth-of-type(1) {
+      justify-content: flex-start;
+    }
+    &:nth-of-type(2) {
+      justify-content: flex-end;
+      > li {
+        > a {
+          // text-indent: -9999px;
+          > i {
+            font-size: 20px;
+          }
+        }
       }
     }
-    .letter{
-      @include absolute($top:35px);
-      width: 84px;
-      height: 60px;
-      background-color: #E4E7E8;
-      border-radius: 3px;
-      z-index:2;
-    }
-    .top{
-      @include absolute($top:35px);
-      width: 100px;
-      height: 88px;
-      clip-path: polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%);
-      background-color:#BD3E24;
-      z-index:1;
-    }
-    .left{
-      @include absolute($top:67px, $left:27px);
-      width: 50px;
-      height: 57px;
-      clip-path: polygon(100% 50%, 0 0, 0 100%);
-      background-color:#DF5A48;
-      z-index:3;
-
-    }
-    .right{
-      @include absolute($top:67px, $left:77px);
-      width: 50px;
-      height: 57px;
-      clip-path: polygon(0 50%, 100% 0, 100% 100%);
-      background-color:#DF5A48; 
-      z-index:3;
-    }
-    .bottom{
-      @include absolute($top:94px, $left:27px);
-      width: 100px;
-      height: 30px;
-      clip-path: polygon(0 100%, 50% 0, 100% 100%);;
-      background-color:#BD3E24;
-      z-index:3;
+    > li {
+      // width: 100%;
+      display: flex;
+      > a {
+        font-size: 12px;
+        color: #fff;
+        // height: 80px;
+        // line-height: 80px;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        text-transform: uppercase;
+        padding: 0 10px;
+        margin-right: 5px;
+        &:hover {
+          height: 40px;
+          background-color: nth(map-get($color, pink), 3);
+        }
+        &.active {
+          height: 40px;
+          background-color: nth(map-get($color, pink), 3);
+        }
+      }
     }
   }
-    
-  .close{
+}
+
+.myCollection {
+  width: 80%;
+  margin-top: 20px;
+  @include absolute($top: 50%, $left: 50%);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  > p {
+    width: 100%;
     display: block;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    @include absolute($top: 10px, $right: 10px);
-    transition: 0.5s;
-    &:hover{
-      transform: rotate(90deg);
+    font-size: 14px;
+    text-transform: uppercase;
+    color: nth(map-get($color, gray), 4);
+    padding-bottom: 10px;
+    > i {
+      font-size: 12px;
+      padding-left: 8px;
     }
-    &:before,
-    &:after {
+  }
+  .colorContent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .colorList {
+      li {
+        width: 120px;
+        height: 50px;
+        font-size: 12px;
+        color: nth(map-get($color, gray), 4);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-left: 20px;
+        &:nth-child(1):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: map-get($color, beige);
+          @include absolute($top: 0, $left: 0);
+        }
+        &:nth-child(2):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: nth(map-get($color, pink), 5);
+          @include absolute($top: 0, $left: 0);
+        }
+        &:nth-child(3):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: nth(map-get($color, pink), 1);
+          @include absolute($top: 0, $left: 0);
+        }
+        &:nth-child(4):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: map-get($color, darkGreen);
+          @include absolute($top: 0, $left: 0);
+        }
+        &:nth-child(5):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: map-get($color, darkBlue);
+          @include absolute($top: 0, $left: 0);
+        }
+
+        .close {
+          display: block;
+          width: 10px;
+          height: 10px;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          @include absolute($top: 5px, $right: 5px);
+          &:before,
+          &:after {
+            content: '';
+            width: 10px;
+            height: 1px;
+            display: block;
+            background-color: nth(map-get($color, gray), 2);
+            margin: 0 auto;
+          }
+          &:before {
+            margin-bottom: -1px;
+            transform: rotate(45deg);
+          }
+          &:after {
+            margin-bottom: -1px;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+  .colorBox {
+    width: 330px;
+    height: 330px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    background:linear-gradient(to top, black, rgba(0, 0, 0, 0)), linear-gradient(to right, white, rgba(255, 255, 255, 0));
+    background-color: map-get($color, darkYellow);
+  }
+  .colorBar {
+    width: 40px;
+    height: 330px;
+    position: relative;
+    &:before {
       content: '';
       width: 20px;
-      height: 2px;
-      display: block;
-      background-color: #000;
-      margin: 0 auto;
-    }
-    &:before {
-      margin-bottom: -2.5px;
-      transform: rotate(45deg);
+      height: 330px;
+      @include absolute($top: 0, $left: 0);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background-image: linear-gradient(
+        to bottom,
+        #ff0000,
+        #fd03fb,
+        #0000ff,
+        #03fedb,
+        #00ff01,
+        #ffff00,
+        #ff0808
+      );
     }
     &:after {
-      margin-bottom: -2.5px;
-      transform: rotate(-45deg);
+      content: '';
+      width: 10px;
+      height: 12px;
+      @include absolute($bottom: 15%, $right: 5px);
+      border-style: solid;
+      border-width: 6px 10px 6px 0;
+      border-color: transparent #909090 transparent transparent;
     }
   }
-  h1{
-    font-size: 36px;
-    color: #f7796c;
-    font-family: 'Open Sans', sans-serif;
-    padding-top: 50px;
-    margin: 20px 50px 0 134px;
+  .colorCode {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    ul {
+      width: 120px;
+      li {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 10px;
+        > p {
+          font-size: 14px;
+        }
+        input {
+          width: 80px;
+          height: 40px;
+          font-size: 14px;
+          text-align: center;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0 0px 5px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
   }
-  p{
-    font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
-    margin-left: 50px;
-    margin-right: 50px;
-  }
-  input.email{
-    display:block;
+  .colorFooter {
     width: 100%;
-    max-width: 395px;
-    font-size: 16px;
-    background-color: #F0F0F0;
-    border: 1px solid #c0c0c0;
-    border-radius: 6px;
-    margin: 24px auto;
-    padding: 10px 0 10px 16px;
-  }
-  a{
-    display: block;
-    width: 210px;
     height: 40px;
-    line-height: 40px;
-    margin: 0 auto;
-    background-color: #EFC84A;
-    color: #DF5A48;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-transform: uppercase;
+    margin: 10px auto;
+    button {
+      font-size: 14px;
+      color: nth(map-get($color, gray), 4);
+      height: 40px;
+      line-height: 40px;
+      text-transform: uppercase;
+      padding: 0 20px;
+      margin-right: 100px;
+      cursor: pointer;
+      background-color: white;
+      border: 1px solid;
+      &:hover{
+        color: white;
+        background-color: rgba(0,0,0,.8);
+      }
+    }
+    .addToCollection {
+      position: relative;
+      &:before {
+        content: '';
+        width: 40px;
+        height: 40px;
+        @include absolute($top: 0, $left: -50px);
+        background-color: map-get($color, darkYellow);
+        padding-right: 5px;
+      }
+    }
   }
 }

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Color picker with Website</title>
+  <link rel="stylesheet" href="/css/lai.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+  <div id="app" class="theme-default">
+    <div class="header">
+      <div class="menu">
+        <a href="#" class="item active">create</a>
+        <a href="#" class="item">my collections</a>
+        <a href="#" class="item">explore</a>
+      </div><!-- menu end -->
+      <div class="headRight">
+        <a href="#" icon="share" class="item"></a>
+        <a href="#" icon="setting" class="item"></a>
+      </div>
+    </div><!-- header end -->
+    <div class="container">
+      <div class="container-title">
+        <span>my collection</span>
+        <a href="#" class="item" icon="edit"></a>
+      </div><!-- title end -->
+      <div class="section">
+        <div class="cell ticketCell">
+          <div class="ticket" v-for="(row, keys) in ticket" :key="'ticket' + keys" v-text="row" :style="'border-color: ' + row + ';'">#f0ceb7</div>
+        </div><!-- cell end --> 
+        <div class="cell colorBox">
+          <div class="colorCube">
+            <canvas id="getColor"></canvas>
+            <div class="point"></div>
+          </div>
+          <div class="colorControl">
+            <a href="#" icon="left-arrow" class="item"></a>
+          </div>
+        </div><!-- cell end --> 
+        <div class="cell controlBox">
+          <div class="row-group">
+            <label class="row colorInput">
+              <span>h</span><input type="text">
+            </label><!-- row end -->
+            <label class="row colorInput">
+              <span>s</span><input type="text">
+            </label><!-- row end -->
+            <label class="row colorInput">
+              <span>b</span><input type="text">
+            </label><!-- row end -->
+          </div><!-- group end -->
+          <div class="row-group">
+            <label class="row colorInput">
+              <span>r</span><input type="text">
+            </label><!-- row end -->
+            <label class="row colorInput">
+              <span>g</span><input type="text">
+            </label><!-- row end -->
+            <label class="row colorInput">
+              <span>b</span><input type="text">
+            </label><!-- row end -->
+          </div><!-- group end -->
+        </div><!-- cell end --> 
+      </div><!-- section end -->
+      <div class="containerFoot">
+        <div class="cell">
+          <button>create new</button>
+        </div>
+        <div class="cell">
+          <label class="">
+            <div class="colorSelect" style="background: #f0ceb7;"></div>
+            <button @click.prevent="saveTicket">add to collection</button>
+          </label>
+        </div>
+      </div><!-- foot end -->
+    </div><!-- container end -->
+  </div><!-- app end -->
+</body>
+</html>
+
+<script>
+new Vue ({
+  methods: {
+    saveTicket (el) {
+      const color = getComputedStyle(el.target.previousElementSibling, null).getPropertyValue('background-color')
+      let newData = this.ticket
+      var result = new renderColor()
+      var test = color.replace(/(?:rgb\()?((?:\d){2,3})(?:\,\s)?\)?/g, '$1,')
+      test = test.split(',').filter(el => el !== '')
+      newData.push( '#' + result.rgeToHex(test))
+    }
+  },
+  data: {
+    ticket: ['#f0ceb7']
+  },
+  el: '#app'
+})  
+const areaCenter = document.querySelector('.colorCube')
+const areaStyle = getComputedStyle(areaCenter, null)
+let getElement = {width: areaCenter.clientWidth, height: areaCenter.clientHeight}
+let newStyle = {
+  background: areaStyle.getPropertyValue('background'),
+  display: 'block',
+  width: getElement.width + 'px',
+  height: getElement.height + 'px'
+}
+newStyle = 'style="' + Object.keys(newStyle).map(r => r + ':' + newStyle[r]).join(';') + ';"'
+const dropper = document.querySelector('#getColor')
+let ctx = renderCanvas(getElement, newStyle)
+
+// mousemove mouseout click
+dropper.addEventListener('click', e => {
+  var result = new renderColor(ctx, e)
+  // console.log(result.colorValue)
+  document.querySelector('.colorSelect').style.background = result.colorValue
+  setPoint(
+    (e.offsetX / getElement.width * 100) - 2,
+    (e.offsetY / getElement.height * 100) - 2
+  )
+})
+
+dropper.addEventListener('mousemove', e => {
+  // var result = new renderColor(ctx, e)
+  // document.querySelector('.colorSelect').style.background = result.colorValue
+})
+
+document.querySelector('.colorControl .item').addEventListener('mousedown', e => {
+  // console.log(e)
+  document.querySelector('.colorControl .item').addEventListener('mousemove', d => {
+    console.log(e.offsetY, d.offsetY)
+  })
+})
+
+
+function setPoint (x, y) {
+  let point = document.querySelector('.point')
+  point.style.left = x + '%'
+  point.style.top = y + '%'
+}
+
+function renderCanvas (ele, style) {
+  let ctx = dropper.getContext('2d')
+  ctx.clearRect(0, 0, 0, 0)
+  dropper.width = ele.width
+  dropper.height = ele.height
+
+  const svgTemplate = `<svg xmlns="http://www.w3.org/2000/svg" width="${ele.width}" height="${ele.height}">
+    <foreignObject width="100%" height="100%">
+      <div ${style} xmlns="http://www.w3.org/1999/xhtml"><span ${style}></span></div>
+    </foreignObject>
+  </svg>`
+  const tempImg = document.createElement('img')
+  tempImg.addEventListener('load', e => ctx.drawImage(e.target, 0, 0))
+  tempImg.src = 'data:image/svg+xml,' + encodeURIComponent(svgTemplate)
+  return ctx
+}
+
+// 渲染顏色
+class renderColor {
+  constructor (cx, data) {
+    this.el = data
+    this.c = cx
+  }
+
+  // 取得最後的結果
+  get colorValue () {
+    let elementData = this.dataCalculation()
+    let col = this.c.getImageData(elementData.x, elementData.y, 1, 1).data
+    if (col[1] > 0) return '#' + this.rgeToHex(col).toLowerCase()
+    else return 'error data'
+  }
+
+  // 取得物件裡的計算
+  dataCalculation () {
+    const data = this.el
+    let x, y
+    if (!data.offsetX) {
+      // for firefox
+      x = data.pageX - data.target.getBoundingClientRect().left
+      y = data.pageY - data.target.getBoundingClientRect().top
+    } else {
+      // for chrome
+      x = data.offsetX
+      y = data.offsetY
+    }
+    return {x: x, y: y}
+  }
+
+  // RGB 轉換 HEX
+  rgeToHex (rgba) {
+    return this.renderHex(rgba[0]) + this.renderHex(rgba[1]) + this.renderHex(rgba[2])
+  }
+
+  // 計算顏色色碼
+  renderHex (data) {
+    let colorNumber = '0123456789ABCDEF'
+    data = parseInt(data, 10)
+    if (isNaN(data)) return '00'
+    data = Math.max(0, Math.min(data, 255))
+    return colorNumber.charAt((data - data % 16) / 16) + colorNumber.charAt(data % 16)
+  }
+}
+</script>
