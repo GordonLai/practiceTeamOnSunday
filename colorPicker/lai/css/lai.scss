@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC:400,700|Ubuntu&amp;subset=chinese-traditional');
+@import url('https://unpkg.com/element-ui/lib/theme-chalk/index.css');
+@import './mixin/laiMixin.scss';
+
+// 基本設定
+body, html {
+  @extend %fontStyle;
+  margin: 0; padding:0;
+  background: map-get($color, backgroundColor);
+  overflow: hidden;
+  width: 100%;height: 100%;
+  width: 100vw;height: 100vh;
+  text-align: center;
+  text-transform:uppercase;
+  @at-root body {
+    overflow-y: auto;
+    &:before, &:after {
+      display: inline-block;content: "";
+      height: 100%;width:1px;vertical-align: middle;
+    }
+  }
+}
+
+// 基本風格樣式整理
+#app {
+  background: white;
+  width: 98%;max-width: map-get($config, width);
+  margin: auto;position: relative;
+  display: inline-block;vertical-align: middle;
+  text-align: left;
+  border-radius: 3px;overflow: hidden;
+  box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.13);
+  @include themify($themes) {
+    .header {
+      background: themed('headerColor');
+    }
+    .containerFoot {
+      button {
+        &:hover {
+          background: themed('darkColor');
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+// for icon use
+.item {
+  @extend %link;
+  @extend %iconFont;
+}
+
+// 欄位設定
+.cell {
+  display: inline-block;vertical-align: top;
+  .row {
+    display: block;
+  }
+}
+
+// 按鈕設定
+button {
+  @extend %link;
+  border: solid 1px map-get($color, fontColor);
+  color: map-get($color, fontColor);
+  height: 35px;padding: 0 15px;
+  font-size: nth(map-get($config, fontSize), 1);
+  transition: .2s;
+}
+
+// 色票設定
+.ticket {
+  font-size: nth(map-get($config, fontSize), 1);
+  border-left-width: 15px;
+  border-left-style: solid;
+  text-indent: 10px;color: map-get($color, colorGray);
+  padding: 15px 0;font-weight: 600;
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.1);
+  min-width: 100px;
+}
+
+// 色碼 input
+.colorInput {
+  & + .colorInput {
+    margin-top: 5px;
+  }
+  > * {
+    display: inline-block;vertical-align: middle;
+  }
+  span {
+    font-size: nth(map-get($config, fontSize), 3);
+    color: map-get($color, colorGray);
+    font-weight: 600;
+    margin-right: 10px;
+    width: 20px;
+  }
+  input {
+    outline: none;height: 28px;padding: 0 8px;
+    box-sizing: border-box;width: calc(100% - 30px);
+  }
+}
+
+// 色塊區域
+.colorBox {
+  > * {
+    display: inline-block; vertical-align: top;
+  }
+  .colorCube {
+    width: 286px; height: 286px;
+    position: relative;cursor: crosshair;
+    @include gradient((
+      linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0)),
+      linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0))
+    ));
+    background-color: #f7a50b;
+    .point {
+      position: absolute;width: 8px;height: 8px;
+      border-radius: 100%;border: solid 2px white;
+      top: 5%;left: 5%;cursor: pointer;
+    }
+  }
+  .colorControl {
+    height: 286px;width: 20px;
+    position: relative;
+    @include gradient(linear-gradient(to top, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 17%, rgb(0, 255, 0) 33%, rgb(0, 255, 255) 50%, rgb(0, 0, 255) 67%, rgb(255, 0, 255) 83%, rgb(255, 0, 0) 100%));
+    .item {
+      position: absolute;right: -25px;
+      color: map-get($color, colorGray);
+      font-size: nth(map-get($config, fontSize), 4);
+      bottom: 5%;
+    }
+  }
+}
+
+// 抬頭
+.header {
+  padding: 10px;
+  position: relative;
+  .item {color: white;}
+  > * {
+    display: inline-block;vertical-align: middle;
+  }
+  .menu {
+    width: calc(100% - 110px);
+    font-size: 12px;
+    font-family: nth(map-get($config, family), 2);
+    .item {
+      letter-spacing: 1px;font-weight: 500;
+      padding: 12px;
+      display: inline-block;vertical-align: top;
+      &:hover, &:active, &.active {
+        background: #e35d7d;
+      }
+    }
+  }
+  .headRight {
+    width: 100px;text-align: right;
+    .item {
+      font-size: nth(map-get($config, fontSize), 2);
+      margin-left: 3px;opacity: 1;
+      &:hover {
+        opacity: .7;
+      }
+    }
+  }
+}
+
+// 下面容器
+.container {
+  padding: 30px;
+  .container-title {
+    margin-bottom: 30px;
+    font-size: nth(map-get($config, fontSize), 3);
+    font-weight: 600;
+    &, .item {
+      color: map-get($color, colorGray);
+    }
+    .item {
+      font-size: nth(map-get($config, fontSize), 1);
+    }
+  }
+  .section {
+    .ticket {
+      & + .ticket {
+        margin-top: 15px;
+      }
+    }
+    .cell {
+      width: calc((100% - 372px) / 2);
+      box-sizing: border-box;
+      max-height: 286px;overflow: hidden;
+      overflow-y: auto;
+    }
+    .colorBox {
+      padding: 0 20px;
+      width: 360px;
+      text-align: center;
+      overflow: visible;
+    }
+    .row-group + .row-group {margin-top: 15px;}
+    .controlBox {
+      display: inline-flex;flex-direction: column;
+      justify-content: space-between;height: 286px;
+    }
+  }
+}
+
+// 底下
+.containerFoot {
+  margin-top: 15px;
+  .cell {
+    &:first-child {
+      width: 155px;
+    }
+    & + .cell {
+      width: calc(100% - (172px + 115px + 90px));
+      text-align: center;
+    }
+  }
+  .colorSelect {
+    display: inline-block;
+    vertical-align: top;width: 35px;height:35px;
+  }
+}
+
+
+.test {
+  position: fixed; bottom: 10px;
+  width: 100%;
+}

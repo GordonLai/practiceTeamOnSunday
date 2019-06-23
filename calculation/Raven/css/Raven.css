@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-family: sans-serif;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 300px;
+  margin: auto;
+  background: #2a3137;
+  text-align: center;
+  color: #fff;
+}
+
+.container .panel {
+  height: 180px;
+  background: linear-gradient(to bottom, #2e353d 0%, #2b323a 1%, #2c3339 43%, #2a3137 45%, #2a3338 59%, #293036 63%, #2d3238 65%, #2d3238 68%, #2a3139 68%, #282f37 72%, #293036 94%, #272e34 100%);
+}
+
+.container .panel .total {
+  height: 100px;
+  font-size: 52px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  line-height: 150px;
+}
+
+.container .panel .process {
+  font-weight: 200;
+  line-height: 50px;
+  color: #49c7f9;
+}
+
+.container .btn-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container .btn-group .btn {
+  box-sizing: border-box;
+  cursor: pointer;
+  flex: 0 0 45px;
+  max-width: 45px;
+  height: 45px;
+  border-radius: 4px;
+  line-height: 45px;
+  font-size: 18px;
+  margin: 15px;
+}
+
+.container .btn-group .btn:active {
+  background: #49c7f9;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/Raven.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+  <div class="container" id="app">
+    <div class="panel">
+      <div class="total" v-text="total">9999</div>
+      <div class="process" v-text="process">9+9+9+9</div>
+    </div>
+    <div class="btn-group">
+      <div class="btn" @click="clear">C</div>
+      <div class="btn">=/-</div>
+      <div class="btn" @click="opations('%')">%</div>
+      <div class="btn" @click="opations('÷')">÷</div>
+      <div class="btn" @click="numAdd(7)">7</div>
+      <div class="btn" @click="numAdd(8)">8</div>
+      <div class="btn" @click="numAdd(9)">9</div>
+      <div class="btn" @click="opations('×')">×</div>
+      <div class="btn" @click="numAdd(4)">4</div>
+      <div class="btn" @click="numAdd(5)">5</div>
+      <div class="btn" @click="numAdd(6)">6</div>
+      <div class="btn" @click="opations('-')">-</div>
+      <div class="btn" @click="numAdd(1)">1</div>
+      <div class="btn" @click="numAdd(2)">2</div>
+      <div class="btn" @click="numAdd(3)">3</div>
+      <div class="btn" @click="opations('+')">+</div>
+      <div class="btn" @click="numAdd(00)">00</div>
+      <div class="btn" @click="numAdd(0)">0</div>
+      <div class="btn" @click="numDot">.</div>
+      <div class="btn">=</div>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    total: 0,
+    process: '',
+    currentNum: 0,
+    dot: false
+  },
+  methods: {
+    clear (){
+      this.total= 0,
+      this.process = '',
+      this.currentNum = 0,
+      this.dot= false
+    },
+    opations(opation){
+      if(this.total === 0 && this.currentNum ===0  ){
+        return
+      }
+      if (this.total == 0) {
+        this.total += this.currentNum
+      }
+      switch(this.process){
+        case 1:
+          this.total += this.currentNum;
+          break
+        case 2:
+          this.total -= this.currentNum
+          break
+        case 3:
+          this.total *= this.currentNum
+          break
+        case 4:
+          this.total /= this.currentNum
+          break
+        case 0:
+          break
+      }
+    },
+    numAdd(num){
+      // if(this.total=== 0){
+        
+      // }
+      this.process = num
+    },
+    numDot(){
+      if(this.dot === false){
+        if(this.currentNum !== 0 ){
+          this.process ='0.'
+        }else {
+          this.process +='.'
+        }
+      }
+      this.dot = true
+    }
+  },
+})
+</script>

@@ -50,8 +50,14 @@ $themes: (
   @return map-get($theme-map, $key);
 }
 
-@function get-value($setting, $name, $index) {
-  @return nth(map-get($setting, $name), $index);
+@function get-value($setting, $name, $index: "") {
+  @if $index != "" {
+    @return nth(map-get($setting, $name), $index);
+  }
+
+  @else {
+    @return map-get($setting, $name);
+  }
 }
 
 $config: (
@@ -87,9 +93,9 @@ $icon-list: (
   bottom-arrow: "\e6df",
   right-arrow: "\e6e0"
 );
-%iconFont {
+@mixin iconFont($family: 'element-icons', $data: ()) {
   &[icon]:before {
-    font-family: 'element-icons';
+    font-family: $family;
     speak: none;
     font-style: normal;
     font-weight: 400;
@@ -99,10 +105,13 @@ $icon-list: (
     vertical-align: baseline;
     display: inline-block;
     -webkit-font-smoothing: antialiased;
+    @content;
   }
-  @each $row, $value in $icon-list {
-    &[icon="#{$row}"]:before {
-      content: map-get($icon-list, $row);
+  @if length($data) > 0 {
+    @each $row, $value in $data {
+      &[icon="#{$row}"]:before {
+        content: map-get($data, $row);
+      }
     }
   }
 }

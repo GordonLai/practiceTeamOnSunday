@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>計算機練習</title>
+  <link rel="stylesheet" href="./css/lai.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="header">
+        <div class="button menu" icon="menu"></div>
+        <div class="button setting" icon="setting"></div>
+      </div><!-- header end -->
+      <div class="result">
+        <div class="light" v-text="total">100</div>
+        <small v-text="process">872x3+787</small>
+      </div><!-- result end -->
+      <div class="section">
+        <a href="#" @click.prevent="send" class="buttonItem">c</a>
+        <a href="#" @click.prevent="send" class="buttonItem">=/-</a>
+        <a href="#" @click.prevent="send" class="buttonItem">%</a>
+        <a href="#" @click.prevent="send" class="buttonItem">÷</a>
+        <a href="#" @click.prevent="send" class="buttonItem">7</a>
+        <a href="#" @click.prevent="send" class="buttonItem">8</a>
+        <a href="#" @click.prevent="send" class="buttonItem">9</a>
+        <a href="#" @click.prevent="send" class="buttonItem">x</a>
+        <a href="#" @click.prevent="send" class="buttonItem">4</a>
+        <a href="#" @click.prevent="send" class="buttonItem">5</a>
+        <a href="#" @click.prevent="send" class="buttonItem">6</a>
+        <a href="#" @click.prevent="send" class="buttonItem">-</a>
+        <a href="#" @click.prevent="send" class="buttonItem">1</a>
+        <a href="#" @click.prevent="send" class="buttonItem">2</a>
+        <a href="#" @click.prevent="send" class="buttonItem">3</a>
+        <a href="#" @click.prevent="send" class="buttonItem">+</a>
+        <a href="#" @click.prevent="send" class="buttonItem">00</a>
+        <a href="#" @click.prevent="send" class="buttonItem">0</a>
+        <a href="#" @click.prevent="send" class="buttonItem">.</a>
+        <a href="#" @click.prevent="send" class="buttonItem bg-blue">=</a>
+      </div><!-- section end -->
+    </div><!-- container end -->
+  </div>
+</body>
+</html>
+
+<script type="text/babel">
+const vm = new Vue({
+  el: '#app',
+  methods: {
+    formatProcess (data) {
+      data = data.replace('x', '*')
+      data = data.replace('÷', '/')
+      data = data.replace('**', '*')
+      data = data.replace('//', '/')
+      data = data.replace('--', '-')
+      data = data.replace('++', '+')
+      return data
+    },
+    send (el) {
+      let customer = el.target.innerText
+      if (customer === 'c') {
+        this.total = '0'
+        this.process = ''
+        return
+      } 
+      if (customer === '=') {
+        let newProcess = this.formatProcess(this.process)
+        return this.total = eval(newProcess)
+      }
+      console.log(this.process)
+      this.process += customer
+    }
+  },
+  mounted () {
+    console.log('run vue is ok')
+  },
+  data: {
+    total: '0',
+    process: ''
+  }
+})
+</script>

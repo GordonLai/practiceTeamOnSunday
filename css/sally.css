@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+body {
+  color: #5A3252;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 ul,
 li {
   list-style: none;
@@ -10,335 +20,149 @@ a {
   text-decoration: none;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
 body,
 html {
   padding: 0;
   margin: 0;
-  width: 100vw;
-  height: 100vh;
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
   font-family: 'Roboto', sans-serif;
-  background-color: #dedede;
-  box-sizing: border-box;
-  position: relative;
   letter-spacing: 1px;
+  background-color: #e5e5e5;
+  position: relative;
 }
 
-#colorPicker {
-  width: 900px;
-  height: 620px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+.wrapper {
+  width: 500px;
+  height: 720px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  position: relative;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.header {
+.promotion_title {
   width: 100%;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f46d8d;
-}
-
-.header > ul {
-  display: flex;
-  width: 45%;
-  height: 40px;
-  align-items: center;
-}
-
-.header > ul:nth-of-type(1) {
-  justify-content: flex-start;
-}
-
-.header > ul:nth-of-type(2) {
-  justify-content: flex-end;
-}
-
-.header > ul:nth-of-type(2) > li > a > i {
-  font-size: 20px;
-}
-
-.header > ul > li {
-  display: flex;
-}
-
-.header > ul > li > a {
-  font-size: 12px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  text-transform: uppercase;
-  padding: 0 10px;
-  margin-right: 5px;
-}
-
-.header > ul > li > a:hover {
-  height: 40px;
-  background-color: #e15e7d;
-}
-
-.header > ul > li > a.active {
-  height: 40px;
-  background-color: #e15e7d;
-}
-
-.myCollection {
-  width: 80%;
-  margin-top: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 20px;
 }
 
-.myCollection > p {
-  width: 100%;
-  display: block;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #525252;
-  padding-bottom: 10px;
-}
-
-.myCollection > p > i {
-  font-size: 12px;
-  padding-left: 8px;
-}
-
-.myCollection .colorContent {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.myCollection .colorContent .colorList li {
-  width: 120px;
-  height: 50px;
-  font-size: 12px;
-  color: #525252;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-left: 20px;
-}
-
-.myCollection .colorContent .colorList li:nth-child(1):before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 50px;
-  background-color: #f0ceb7;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.myCollection .colorContent .colorList li:nth-child(2):before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 50px;
-  background-color: #f59db5;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.myCollection .colorContent .colorList li:nth-child(3):before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 50px;
-  background-color: #f46d8d;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.myCollection .colorContent .colorList li:nth-child(4):before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 50px;
-  background-color: #044156;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.myCollection .colorContent .colorList li:nth-child(5):before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 50px;
-  background-color: #090e2b;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.myCollection .colorContent .colorList li .close {
-  display: block;
-  width: 10px;
-  height: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
-
-.myCollection .colorContent .colorList li .close:before, .myCollection .colorContent .colorList li .close:after {
-  content: '';
-  width: 10px;
-  height: 1px;
-  display: block;
-  background-color: #909090;
-  margin: 0 auto;
-}
-
-.myCollection .colorContent .colorList li .close:before {
-  margin-bottom: -1px;
-  transform: rotate(45deg);
-}
-
-.myCollection .colorContent .colorList li .close:after {
-  margin-bottom: -1px;
-  transform: rotate(-45deg);
-}
-
-.myCollection .colorBox {
-  width: 330px;
-  height: 330px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(to top, black, rgba(0, 0, 0, 0)), linear-gradient(to right, white, rgba(255, 255, 255, 0));
-  background-color: #f7be4b;
-}
-
-.myCollection .colorBar {
-  width: 40px;
-  height: 330px;
-  position: relative;
-}
-
-.myCollection .colorBar:before {
-  content: '';
-  width: 20px;
-  height: 330px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-image: linear-gradient(to bottom, #ff0000, #fd03fb, #0000ff, #03fedb, #00ff01, #ffff00, #ff0808);
-}
-
-.myCollection .colorBar:after {
-  content: '';
-  width: 10px;
-  height: 12px;
-  position: absolute;
-  bottom: 15%;
-  right: 5px;
-  border-style: solid;
-  border-width: 6px 10px 6px 0;
-  border-color: transparent #909090 transparent transparent;
-}
-
-.myCollection .colorCode {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.myCollection .colorCode ul {
-  width: 120px;
-}
-
-.myCollection .colorCode ul li {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px;
-}
-
-.myCollection .colorCode ul li > p {
-  font-size: 14px;
-}
-
-.myCollection .colorCode ul li input {
-  width: 80px;
-  height: 40px;
-  font-size: 14px;
+.promotion_title p {
+  font-size: 10px;
   text-align: center;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 0px 5px rgba(0, 0, 0, 0.2);
 }
 
-.myCollection .colorFooter {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  text-transform: uppercase;
-  margin: 10px auto;
-}
-
-.myCollection .colorFooter button {
-  font-size: 14px;
-  color: #525252;
-  height: 40px;
-  line-height: 40px;
-  text-transform: uppercase;
-  padding: 0 20px;
-  margin-right: 100px;
-  cursor: pointer;
-  background-color: white;
-  border: 1px solid;
-}
-
-.myCollection .colorFooter button:hover {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.myCollection .colorFooter .addToCollection {
+.promotion_title p:nth-of-type(1) {
+  width: 120px;
+  height: 20px;
+  line-height: 20px;
+  background-color: #ffef7b;
   position: relative;
 }
 
-.myCollection .colorFooter .addToCollection:before {
+.promotion_title p:nth-of-type(1):before {
   content: '';
-  width: 40px;
-  height: 40px;
+}
+
+.spinner {
   position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  color: black;
+  box-shadow: 0 0 1px 1px #999999;
+}
+
+.spinner .prize-item {
+  position: absolute;
+  transform-origin: bottom right;
+  width: 150px;
+  height: 150px;
+}
+
+.spinner .prize-item:nth-child(1) {
+  background: white;
+  transform: rotate(0deg);
+}
+
+.spinner .prize-item:nth-child(2) {
+  background: #999999;
+  transform: rotate(60deg);
+}
+
+.spinner .prize-item:nth-child(3) {
+  background: white;
+  transform: rotate(120deg);
+}
+
+.spinner .prize-item:nth-child(4) {
+  background: #999999;
+  transform: rotate(180deg);
+}
+
+.spinner .prize-item:nth-child(5) {
+  background: white;
+  transform: rotate(240deg);
+}
+
+.spinner .prize-item:nth-child(6) {
+  overflow: hidden;
+  transform: rotate(300deg);
+}
+
+.spinner .prize-item:nth-child(6):before {
+  content: '';
+  width: 150px;
+  height: 150px;
+  background: #999999;
   top: 0;
-  left: -50px;
-  background-color: #f7be4b;
-  padding-right: 5px;
+  left: 0;
+  position: absolute;
+  transform-origin: bottom right;
+  transform: rotate(-30deg);
+}
+
+.spinner .prize-item:nth-child(odd) p {
+  color: #888888;
+}
+
+.spinner .prize-item h5 {
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+  position: absolute;
+  top: 55%;
+  left: 5%;
+  transform: rotate(-60deg);
+  padding: 0;
+  margin: 0;
+}
+
+.spinner .prize-item h5 > span {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.spinner .prize-item p {
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: 65%;
+  right: 35%;
+  transform: translate(-50%, -50%);
+  transform: rotate(-60deg);
+  padding: 0;
+  margin: 0;
 }

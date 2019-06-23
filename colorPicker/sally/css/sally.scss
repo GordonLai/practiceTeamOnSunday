@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+ul,
+li {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+
+$color: (
+  gray: #dedede #909090 #888888 #525252,
+  beige: #f0ceb7,
+  lilac: #f39eb5,
+  pink: #f46d8d #e05f7d #e15e7d #f86b8e #f59db5,
+  darkGreen: #044156,
+  darkBlue: #090e2b,
+  darkYellow: #f7be4b
+);
+
+@mixin absolute($top: auto, $left: auto, $bottom: auto, $right: auto) {
+  position: absolute;
+  @if $top != auto {
+    top: $top;
+  }
+  @if $left != auto {
+    left: $left;
+  }
+  @if $bottom != auto {
+    bottom: $bottom;
+  }
+  @if $right != auto {
+    right: $right;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  @at-root body {
+    font-family: 'Roboto', sans-serif;
+    background-color: nth(map-get($color, gray), 1);
+    box-sizing: border-box;
+    position: relative;
+    letter-spacing: 1px;
+  }
+}
+
+#colorPicker {
+  width: 900px;
+  height: 620px;
+  // border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  @include absolute($top: 50%, $left: 50%);
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  position: relative;
+}
+.header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: nth(map-get($color, pink), 1);
+  > ul {
+    display: flex;
+    width: 45%;
+    height: 40px;
+    align-items: center;
+    &:nth-of-type(1) {
+      justify-content: flex-start;
+    }
+    &:nth-of-type(2) {
+      justify-content: flex-end;
+      > li {
+        > a {
+          // text-indent: -9999px;
+          > i {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+    > li {
+      // width: 100%;
+      display: flex;
+      > a {
+        font-size: 12px;
+        color: #fff;
+        // height: 80px;
+        // line-height: 80px;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        text-transform: uppercase;
+        padding: 0 10px;
+        margin-right: 5px;
+        &:hover {
+          height: 40px;
+          background-color: nth(map-get($color, pink), 3);
+        }
+        &.active {
+          height: 40px;
+          background-color: nth(map-get($color, pink), 3);
+        }
+      }
+    }
+  }
+}
+
+.myCollection {
+  width: 80%;
+  margin-top: 20px;
+  @include absolute($top: 50%, $left: 50%);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  > p {
+    width: 100%;
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: nth(map-get($color, gray), 4);
+    padding-bottom: 10px;
+    > i {
+      font-size: 12px;
+      padding-left: 8px;
+    }
+  }
+  .colorContent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .colorList {
+      li {
+        width: 120px;
+        height: 50px;
+        font-size: 12px;
+        color: nth(map-get($color, gray), 4);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-left: 20px;
+        &:nth-child(1):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: map-get($color, beige);
+          @include absolute($top: 0, $left: 0);
+        }
+        &:nth-child(2):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: nth(map-get($color, pink), 5);
+          @include absolute($top: 0, $left: 0);
+        }
+        &:nth-child(3):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: nth(map-get($color, pink), 1);
+          @include absolute($top: 0, $left: 0);
+        }
+        &:nth-child(4):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: map-get($color, darkGreen);
+          @include absolute($top: 0, $left: 0);
+        }
+        &:nth-child(5):before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 50px;
+          background-color: map-get($color, darkBlue);
+          @include absolute($top: 0, $left: 0);
+        }
+
+        .close {
+          display: block;
+          width: 10px;
+          height: 10px;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          @include absolute($top: 5px, $right: 5px);
+          &:before,
+          &:after {
+            content: '';
+            width: 10px;
+            height: 1px;
+            display: block;
+            background-color: nth(map-get($color, gray), 2);
+            margin: 0 auto;
+          }
+          &:before {
+            margin-bottom: -1px;
+            transform: rotate(45deg);
+          }
+          &:after {
+            margin-bottom: -1px;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+  .colorBox {
+    width: 330px;
+    height: 330px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    background:linear-gradient(to top, black, rgba(0, 0, 0, 0)), linear-gradient(to right, white, rgba(255, 255, 255, 0));
+    background-color: map-get($color, darkYellow);
+  }
+  .colorBar {
+    width: 40px;
+    height: 330px;
+    position: relative;
+    &:before {
+      content: '';
+      width: 20px;
+      height: 330px;
+      @include absolute($top: 0, $left: 0);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background-image: linear-gradient(
+        to bottom,
+        #ff0000,
+        #fd03fb,
+        #0000ff,
+        #03fedb,
+        #00ff01,
+        #ffff00,
+        #ff0808
+      );
+    }
+    &:after {
+      content: '';
+      width: 10px;
+      height: 12px;
+      @include absolute($bottom: 15%, $right: 5px);
+      border-style: solid;
+      border-width: 6px 10px 6px 0;
+      border-color: transparent #909090 transparent transparent;
+    }
+  }
+  .colorCode {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    ul {
+      width: 120px;
+      li {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 10px;
+        > p {
+          font-size: 14px;
+        }
+        input {
+          width: 80px;
+          height: 40px;
+          font-size: 14px;
+          text-align: center;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0 0px 5px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+  .colorFooter {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-transform: uppercase;
+    margin: 10px auto;
+    button {
+      font-size: 14px;
+      color: nth(map-get($color, gray), 4);
+      height: 40px;
+      line-height: 40px;
+      text-transform: uppercase;
+      padding: 0 20px;
+      margin-right: 100px;
+      cursor: pointer;
+      background-color: white;
+      border: 1px solid;
+      &:hover{
+        color: white;
+        background-color: rgba(0,0,0,.8);
+      }
+    }
+    .addToCollection {
+      position: relative;
+      &:before {
+        content: '';
+        width: 40px;
+        height: 40px;
+        @include absolute($top: 0, $left: -50px);
+        background-color: map-get($color, darkYellow);
+        padding-right: 5px;
+      }
+    }
+  }
+}

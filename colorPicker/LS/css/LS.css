@@ -1,0 +1,25 @@
+*{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+.container{
+  width:1200px;
+  margin:0 auto;
+  border:1px solid red;
+}
+.menu{
+    width:100%;
+    height:60px;
+    background-color:#ff95ca;
+}
+.menu ul{
+    display:flex;
+} 
+.menu ul li{
+    width:150px;
+    height:50px;
+    line-height: 50px;
+    text-align: center; 
+    margin:5px;
+}

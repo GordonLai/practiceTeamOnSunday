@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css?family=Poiret+One|Rubik');
+
+$c1: #000;
+$c2: #fff;
+$c3: #8c8c8c;
+$c4: #f46d8d;
+$c5: #e35e7d;
+body {
+  font-family: "Rubik", "sans-serif", "Poiret One", "cursive";
+  margin: 0;
+  padding: 0;
+  background-color: #dedede;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+title {
+  display: block;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+//fn scss
+%setCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@mixin size($w,$h:$w){
+  width: $w;
+  height: $h;
+}
+
+@mixin setBg($color){
+
+  background-color: $color;
+}
+
+@mixin brdRad($tl, $tr:$tl, $br:$tl, $bl:$tl){
+	border-top-left-radius: $tl;
+	border-top-right-radius: $tr;
+	border-bottom-right-radius: $br;
+	border-bottom-left-radius: $bl;
+}
+//fn css
+.color-model {
+  @include size(10px);
+  color: $c3;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.code-list {
+  > div {
+    display: inline-block;
+  }
+  .color-model {
+    margin-right: 8px;
+  }
+}
+.rbg-num {
+  width: 40px;
+  overflow: hidden;
+  display: inline-block;
+  border: 1.5px solid $c3;
+  vertical-align: bottom;
+  #num {
+    padding-left: 5px;
+    font-weight: 700;
+    color: $c3;
+  }
+  #num {
+    border: none;
+    outline: none;
+  }
+}
+
+.btn {
+  @include brdRad(4px);
+  display: block;
+  margin: auto;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  border: 2px solid $c3;
+  color: $c3;
+  font-size: 20px;
+}
+
+// main
+.main {
+  max-width: 800px;
+  @extend %setCenter;
+  @include size(60%,70%);
+  @include setBg($c2);
+  @include brdRad(4px);
+  .container {
+    padding: 50px;
+    height: calc(100% - 75px);
+    box-sizing: border-box;
+    .container-title {
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: $c3;
+    }
+  }
+}
+.function-panel {
+  @include size(100%,75px);
+  @include setBg($c4);
+  color: $c1;
+  ul {
+    li {
+      cursor: pointer;
+      display: inline;
+      line-height: 75px;
+      margin: 0 8px;
+      padding: 16px;
+      color: $c2;
+      font-size: 18px;
+      &.active,&:hover {
+        @include setBg($c5);
+      }
+    }
+  }
+}
+
+// 顏色清單
+
+.collect {
+  float: left;
+  @include size(25%,100%);
+  .collect-list {
+    li {
+      position: relative;
+      box-shadow: 0 0 10px 2px rgba($color: $c1, $alpha: 0.15);
+      height: 60px;
+      margin-bottom: 15px;
+      > div {
+        float: left;
+        display: inline-block;
+      }
+      .color-layout {
+        @include size(20%,100%);
+      }
+      .code {
+        @include size(80%,100%);
+        line-height: 60px;
+        text-align: center;
+        color: $c3;
+      }
+      .close-btn {
+        position: absolute;
+        top: 2.5%;
+        right: 2.5%;
+        color: $c3;
+      }
+    }
+  }
+}
+
+// 顏色區塊 
+.color-picker{
+  float: left;
+  @include size(100%);
+  max-width: 360px;
+  margin: 0 16px;
+  .color-block {
+    cursor: pointer;
+    position: relative;
+    @include size(360px);
+    margin-bottom: 15px;
+    background: -webkit-linear-gradient(bottom, #000 0%, rgba(0, 0, 0, 0) 100%),
+    -webkit-linear-gradient(left, #FFF 0%, rgba(255, 255, 255, 0) 100%);
+    .pointer {
+      cursor: pointer;
+      @include size(15px);
+      @include brdRad(50%);
+      border: 1px solid #FFF;
+      position: absolute;
+      &:before {
+        @include size(10px);
+        @include brdRad(50%);
+        content: "";
+        position: absolute;
+        border: 2px solid #999;
+      }
+    }
+  }
+  .preview {
+    @include size(43px);
+    float: left;
+    margin: 0 5%;
+    .preview-color {
+      @include size(100%);
+      @include brdRad(8px);
+      border: 1px solid $c3;
+    }
+  }
+}
+
+// 顏色線
+.color-line {
+  float: left;
+  position: relative;
+  @include size(16px , 360px);
+  background: -webkit-linear-gradient(top, #ff0004 0%, #fe00ff 17%, #0100ff 33%,#00fffb 50%,#00f4ff 51%,#01ff00 67%, #feff00 83%,#ff0400 100%);
+  margin-right: 40px;
+  .color-pointer{
+    cursor: pointer;
+    position: absolute;
+    top:0;
+    left: 100%;
+    @include size(0);
+    border-style: solid;
+    border-width: 5px 10px 5px 0;
+    border-color: transparent $c1 transparent transparent;
+  }
+}
+
+.color-code {
+  float: left;
+  position: relative;
+  @include size(auto , 360px);
+  .code-list {
+    margin-bottom: 12px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  .rgb {
+    position: absolute;
+    bottom: 0 ;
+  }
+}

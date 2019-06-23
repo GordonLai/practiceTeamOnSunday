@@ -14,7 +14,10 @@ const debug = (data, information) => {
   }
 };
 const liveServer = require("live-server");
-const parther = ['main', 'lai', 'ivy', 'bezier', 'Raven', 'Reynold', 'sally', 'LS'];
+const parther = [
+  'main', 'lai', 'ivy', 'bezier', 'Raven', 'Reynold', 'sally', 'LS',
+  'oswlad', 'Steven'
+];
 
 const params = {
     port: 9000, // 設定伺服器啟動時的使用的 Port. 預設不設定是 8080.
@@ -28,19 +31,19 @@ const params = {
     logLevel: 1, // 0 = 僅錯誤，1 = 某些，2 = 批次
     middleware: [function(req, res, next) { next();}], // 採用一系列與Connect兼容的中間件，這些中間件被注入到服務器中間件堆棧中
 };
-liveServer.start(params);
+// liveServer.start(params);
 // console.log(process.cwd());
 
 // 啟動 server
 parther.forEach((item, key) => {
-  const dir = './colorPicker/' + item;
+  const dir = './roulette/' + item;
   if (item !== 'main') checkFolder (dir);
   let newParams = params;
   newParams.port = 9000 + (key * 10);
   newParams.root = item === 'main' ? './' : dir + "/";
   // console.log(newParams.root);
-  // if (!creatServer(newParams)) setTimeout(creatServer, 1500, newParams);
 });
+// if (!creatServer(newParams)) setTimeout(creatServer, 1500, newParams);
 
 function creatServer (option) {
   if (!fs.existsSync(option.root + 'index.html') && option.root !== 'index.html') {
@@ -65,12 +68,13 @@ function checkFolder (folder) {
     const checkFolder = [
       folder + '/index.html',
       'scss/' + file + '.scss',
+      'scss/mixin/' + file + 'Mixin.scss',
       'css/' + file + '.css'
-    ].forEach(item => checkFile(item));
+    ].forEach(item => checkFile(item, file));
   } 
 
   // 新增基本文件
-  function checkFile (item) {
+  function checkFile (item, name) {
     if (!fs.existsSync(item)) {
       // debug(item.indexOf('index.html'), 'warning');
       if (item.indexOf('index.html') > 0) {
@@ -80,7 +84,11 @@ function checkFolder (folder) {
           fs.writeFile(item, reads, () => {});
         })
       }
-      if (item.indexOf('index.html') < 0) {
+      if (item.indexOf('mixin') >= 0) {
+        fs.writeFile(item, "$color:(color: " + getRandomColor() + ");", (err, data) => {});
+      } else if (item.indexOf('scss') >= 0 && item.indexOf('mixin') < 0) {
+        fs.writeFile(item, "@import './mixin/" + name + "Mixin.scss';body {color: " + getRandomColor() + ";}", (err, data) => {});
+      } else if (item.indexOf('index.html') < 0) {
         fs.writeFile(item, "body {color: " + getRandomColor() + ";}", (err, data) => {});
       }
     }

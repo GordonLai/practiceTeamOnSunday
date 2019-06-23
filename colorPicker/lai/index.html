@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Color picker with Website</title>
-  <link rel="stylesheet" href="/css/lai.css">
+  <link rel="stylesheet" href="./css/lai.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
 </head>
 <body>
@@ -97,7 +97,10 @@ new Vue ({
   },
   el: '#app'
 })  
+let move = false
+const usePoint = document.querySelector('.point')
 const areaCenter = document.querySelector('.colorCube')
+const colorSelect = document.querySelector('.colorSelect')
 const areaStyle = getComputedStyle(areaCenter, null)
 let getElement = {width: areaCenter.clientWidth, height: areaCenter.clientHeight}
 let newStyle = {
@@ -113,25 +116,24 @@ let ctx = renderCanvas(getElement, newStyle)
 // mousemove mouseout click
 dropper.addEventListener('click', e => {
   var result = new renderColor(ctx, e)
-  // console.log(result.colorValue)
-  document.querySelector('.colorSelect').style.background = result.colorValue
   setPoint(
     (e.offsetX / getElement.width * 100) - 2,
     (e.offsetY / getElement.height * 100) - 2
   )
+  colorSelect.style.background = result.colorValue
 })
 
 dropper.addEventListener('mousemove', e => {
-  // var result = new renderColor(ctx, e)
-  // document.querySelector('.colorSelect').style.background = result.colorValue
+  var result = new renderColor(ctx, e)
+  if (!move) return
+  setPoint(
+    (e.offsetX / getElement.width * 100) - 2,
+    (e.offsetY / getElement.height * 100) - 2
+  )
+  colorSelect.style.background = result.colorValue
 })
-
-document.querySelector('.colorControl .item').addEventListener('mousedown', e => {
-  // console.log(e)
-  document.querySelector('.colorControl .item').addEventListener('mousemove', d => {
-    console.log(e.offsetY, d.offsetY)
-  })
-})
+areaCenter.addEventListener('mouseup', e => move = false)
+usePoint.addEventListener('mousedown', e => move = true)
 
 
 function setPoint (x, y) {
@@ -166,10 +168,16 @@ class renderColor {
 
   // 取得最後的結果
   get colorValue () {
+    let col = this.getRGB()
+    return '#' + this.rgeToHex(col).toLowerCase()
+  }
+
+  // 取得 rgb
+  getRGB () {
     let elementData = this.dataCalculation()
     let col = this.c.getImageData(elementData.x, elementData.y, 1, 1).data
-    if (col[1] > 0) return '#' + this.rgeToHex(col).toLowerCase()
-    else return 'error data'
+    if (col[1] > 0) return col
+    else throw('error data')
   }
 
   // 取得物件裡的計算

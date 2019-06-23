@@ -30,8 +30,15 @@ https://gordonlai.github.io/practiceTeamOnSunday/
   4. css/(編輯過)個人名稱.css
 ```
 
-## 2019/05/12 練習未定
-待續...
+https://prod.liveshare.vsengsaas.visualstudio.com/join?2DBAED932A2255FC48CBA09BBA82A08B1E85
+
+## 2019/05/26 Calculation 版型 與 功能練習
+### 版型
+https://1drv.ms/u/s!ApgsQGQ7G6EOv15kQTzYWL0aA2bO
+### 完成目標
+> 版型切版完成
+> 完成基本運算功能 加、減、乘、除、百分比
+> 額外目標 完成動態效果如[參考圖](https://1drv.ms/u/s!ApgsQGQ7G6EOv2CHBq7gWUxyflo0)
 
 ---
 

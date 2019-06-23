@@ -1,0 +1,145 @@
+body {
+  background: #ccc;
+  font-family: 'Mukta', sans-serif;
+  color: #ccc;
+  ul{
+   list-style: none;
+   padding-inline-start:0;
+  }
+  [draggable="true"] {
+   /*
+    To prevent user selecting inside the drag source
+   */
+   user-select: none;
+   -moz-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   }
+  .colorPickerBox{
+   width: 531px;
+   margin: 15vh auto 0 auto;
+   background: #fff;
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 0px 1px, rgba(0, 0, 0, 0.15) 0px 8px 16px;
+   .nav{
+    background: #f46d8d;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+    color: #fff;
+    
+    li{
+     float:left;
+     padding: 5px;
+     margin: 0 5px;
+     font-size: 12px;
+    }
+    li.ativt{
+     background: #e15e7d;
+    }
+   }
+   .content{
+    padding: 20px;
+    color:#ccc;
+    overflow: hidden;
+     h1{
+      font-size: 16px;
+      margin: 0 0 10px 0;
+     }
+     .collectionList{
+      float: left; 
+      width: 100px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+     }
+    .colorPickPool{
+     background: hsl(0, 100%, 50%);
+     margin-right: 10px;
+     margin-bottom: 10px;
+     width: 256px;
+     height: 256px;
+     position: relative;
+     float: left;
+     overflow:hidden;
+     .Chroma{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+     }
+     .Brightness{
+       position: absolute;
+       top: 0px;
+       right: 0px;
+       bottom: 0px;
+       left: 0px;
+       background: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0));
+     }
+     #point{
+       position: absolute;
+       cursor: all-scroll;
+       &::after{
+         display: block;
+         content: "";
+         width: 12px;
+         height: 12px;
+         border-radius: 6px;
+         box-shadow: rgb(255, 255, 255) 0px 0px 0px 1.5px, rgba(0, 0, 0, 0.3) 0px 0px 1px 1px inset, rgba(0, 0, 0, 0.4) 0px 0px 1px 2px;
+         transform: translate(-6px, -6px);
+       }
+     }
+
+ 
+    }
+    .rainbow{
+     height: 256px;
+     width: 19px;
+     float:left;
+     position: relative;
+     margin-right: 20px;
+     margin-bottom: 10px;
+     background: linear-gradient(to top, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 17%, rgb(0, 255, 0) 33%, rgb(0, 255, 255) 50%, rgb(0, 0, 255) 67%, rgb(255, 0, 255) 83%, rgb(255, 0, 0) 100%);
+     #bar{
+      position: absolute;
+      cursor: n-resize;
+      &::after{
+        content: "\f0d9";
+        font-weight: 900;
+        font-family: "Font Awesome 5 Free";
+        -webkit-font-smoothing: antialiased;
+        display: block;
+        margin-left: 22px;
+        margin-top: -8px;
+      }
+     }
+    }
+    .inputBox{
+     float:left;
+     [type="number"]{
+      width: 50px;
+      text-align: center;
+     }
+     span{
+      width: 12px;
+      display: inline-block;
+     }
+    }
+    #nowColor{
+     width:40px;
+     height:40px;
+     float:left;
+     clear: left;
+     margin-left: 110px;
+    }
+    button{
+     border: 0.8px solid #000;
+     background: #fff;
+     padding: 12px;
+     font-size: 12px;
+     float:left;
+     margin-left: 10px;
+    }
+   }
+  }
+ }

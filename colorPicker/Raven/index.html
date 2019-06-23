@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="/css/Raven.css">
+  <link rel="stylesheet" href="./css/Raven.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
 
 </head>
@@ -32,7 +32,7 @@
         <button class="btn">create new</button>
       </div>
       <div class="color-picker">
-        <div class="color-block" @mousedown="choose($event)" >
+        <div class="color-block" @mousedown="choose($event)" ref="box">
           <div class="pointer" :style="pointPosition" ref="point"></div>
         </div>
         <div class="preview">
@@ -40,7 +40,9 @@
         </div>
         <button class="btn">add to collection</button>
       </div>
-      <div class="color-line"></div>
+      <div class="color-line" ref="liner" >
+        <div class="color-pointer" ref="pointer" @mousedown="linePicker" :style="linePosition"></div>
+      </div>
       <div class="color-code">
         <div class="hsb">
           <div class="code-list">
@@ -93,6 +95,9 @@ var app = new Vue({
   el:'#app',
   data: {
     isDrag: false,
+    linePos: {
+      y: 0
+    },
     dataPos: {
       x: 0,
       y: 0
@@ -131,20 +136,38 @@ var app = new Vue({
         top: this.dataPos.y +'px',
         left: this.dataPos.x +'px'
       }
+    },
+    linePosition(){
+      return this.linePos.y + '%'
     }
   },
   methods: {
+    linePicker(ev){
+      window.removeEventListener('mousemove', this.lineMove)
+      window.removeEventListener('mouseup', this.lineEnd)
+    },
+    lineMove(ev){
+      let pointer = this.$refs.pointer
+      let liner = this.$refs.liner
+      console.log(ev)
+    },
+    lineEnd(){
+      window.removeEventListener('mousemove', this.lineMove)
+      window.removeEventListener('mouseup', this.lineEnd)
+    },
     choose(ev) {
+      let box = document.querySelector('.color-block')
       if(!this.isDrag) {
-        window.addEventListener('mousemove', this.moveOn)
-        window.addEventListener('mouseup', this.moveEnd)
+        box.addEventListener('mousemove', this.moveOn)
+        box.addEventListener('mouseup', this.moveEnd)
       }
     },
     getPos (ev){
-      let point = this.$refs.point;
-      let X = ev.offsetX - ( point.offsetWidth / 2 )
-      let Y = ev.offsetY - ( point.offsetHeight / 2 )
-      
+      let point = this.$refs.point
+      let box = this.$refs.box
+      let X = ev.clientX - (point.offsetWidth / 2 )
+      let Y = ev.clientY - (point.offsetHeight / 2)
+      // console.log()
       return {x: X ,y: Y }
     },
     moveOn(ev) {
@@ -157,8 +180,9 @@ var app = new Vue({
       this.dataPos.y = Y
     },
     moveEnd(){
-      window.removeEventListener('mousemove', this.moveOn)
-      window.removeEventListener('mouseup', this.moveEnd)
+      let box = this.$refs.box
+      box.removeEventListener('mousemove', this.moveOn)
+      box.removeEventListener('mouseup', this.moveEnd)
     }
   },
 })
